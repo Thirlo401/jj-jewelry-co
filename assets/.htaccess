@@ -1,0 +1,6 @@
+# Security Configurations
+
+# Protect this file
+<Files ".htaccess">
+    Require all denied
+</Files>
