@@ -1,6 +1,6 @@
 <?php
-$pageTitle = 'Thank You';
-require_once __DIR__ . '/includes/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/includes/bootstrap.php';
 
 // Get order number
 $orderNumber = $_GET['order'] ?? '';
@@ -43,6 +43,10 @@ foreach ($orderItems as $item) {
     $productSummary[] = $item['product_name'] . $qty;
 }
 $paymentForText = implode(', ', $productSummary);
+
+// Now safe to output HTML
+$pageTitle = 'Thank You';
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">

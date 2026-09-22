@@ -1,8 +1,8 @@
 <?php
-$pageTitle = 'Shopping Cart';
-require_once __DIR__ . '/includes/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/includes/bootstrap.php';
 
-// Handle cart updates
+// Handle cart updates BEFORE any output
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         if (isset($_POST['update_cart'])) {
@@ -22,6 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Get cart items with details
 $cartItems = getCartItemsWithDetails();
 $cartTotal = calculateCartTotal(getCart());
+
+// Now safe to output HTML
+$pageTitle = 'Shopping Cart';
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">

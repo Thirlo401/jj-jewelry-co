@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/includes/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/includes/bootstrap.php';
 
 // Get product by slug
 $slug = $_GET['slug'] ?? '';
@@ -17,9 +18,7 @@ if (!$product) {
     redirect(BASE_URL . '/shop.php');
 }
 
-$pageTitle = $product['name'];
-
-// Handle add to cart
+// Handle add to cart BEFORE any output
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $quantity = (int)($_POST['quantity'] ?? 1);
@@ -33,6 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         }
     }
 }
+
+// Now safe to output HTML
+$pageTitle = $product['name'];
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">

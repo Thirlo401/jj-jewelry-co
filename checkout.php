@@ -1,8 +1,8 @@
 <?php
-$pageTitle = 'Checkout';
-require_once __DIR__ . '/includes/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/includes/bootstrap.php';
 
-// Check if cart is empty
+// Check if cart is empty BEFORE any output
 $cartItems = getCartItemsWithDetails();
 $cartTotal = calculateCartTotal(getCart());
 
@@ -10,7 +10,7 @@ if (empty($cartItems)) {
     redirect(BASE_URL . '/cart.php');
 }
 
-// Handle checkout submission
+// Handle checkout submission BEFORE any output
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         // Validate input
@@ -79,6 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
         }
     }
 }
+
+// Now safe to output HTML
+$pageTitle = 'Checkout';
+require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">
