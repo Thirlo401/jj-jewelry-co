@@ -1,6 +1,12 @@
 <?php
-$pageTitle = 'Edit Product';
-require_once __DIR__ . '/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/session.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/helpers.php';
+
+requireAdminLogin();
 
 // Check if editing or creating
 $productId = $_GET['id'] ?? null;
@@ -11,12 +17,9 @@ if ($productId) {
     if (!$product) {
         redirect(BASE_URL . '/admin/products.php');
     }
-    $pageTitle = 'Edit Product';
-} else {
-    $pageTitle = 'Add New Product';
 }
 
-// Handle form submission
+// Handle form submission BEFORE any output
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_product'])) {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $errors = [];
@@ -99,6 +102,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_product'])) {
         }
     }
 }
+
+// Now safe to output HTML
+$pageTitle = $productId ? 'Edit Product' : 'Add New Product';
+require_once __DIR__ . '/header.php';
 ?>
 
 <h1><?= $pageTitle ?></h1>

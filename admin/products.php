@@ -1,8 +1,14 @@
 <?php
-$pageTitle = 'Products';
-require_once __DIR__ . '/header.php';
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../includes/db.php';
+require_once __DIR__ . '/../includes/session.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../includes/helpers.php';
 
-// Handle delete
+requireAdminLogin();
+
+// Handle delete BEFORE any output
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product'])) {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $productId = (int)$_POST['product_id'];
@@ -18,6 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product'])) {
         redirect(BASE_URL . '/admin/products.php');
     }
 }
+
+// Now safe to output HTML
+$pageTitle = 'Products';
+require_once __DIR__ . '/header.php';
 
 // Get all products
 $products = db()->fetchAll("SELECT * FROM products ORDER BY created_at DESC");
