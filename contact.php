@@ -14,7 +14,7 @@ $storePhone = getSetting('store_phone', '+27 11 123 4567');
             Have questions about our diamonds or jewelry? We're here to help.
         </p>
         
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); max-width: 1000px; margin: 0 auto;">
+        <div class="contact-grid">
             <div class="admin-card">
                 <h3>Get In Touch</h3>
                 

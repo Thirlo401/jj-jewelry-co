@@ -100,7 +100,7 @@ require_once __DIR__ . '/includes/header.php';
             </div>
         <?php endif; ?>
         
-        <div style="display: grid; grid-template-columns: 1fr 400px; gap: var(--spacing-lg); margin-top: var(--spacing-md);">
+        <div class="checkout-grid">
             <div>
                 <form method="POST" id="checkout-form">
                     <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
