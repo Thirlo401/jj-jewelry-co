@@ -21,13 +21,13 @@ $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 <body>
     <header class="admin-header">
         <nav class="admin-nav">
-            <div>
-                <a href="<?= BASE_URL ?>/admin/" style="font-weight: 600; font-size: 1.125rem;">
+            <div class="admin-brand">
+                <a href="<?= BASE_URL ?>/admin/">
                     <?= SITE_NAME ?> Admin
                 </a>
             </div>
             
-            <div>
+            <div class="admin-nav-links">
                 <a href="<?= BASE_URL ?>/admin/" class="<?= $currentPage === 'index' ? 'active' : '' ?>">Dashboard</a>
                 <a href="<?= BASE_URL ?>/admin/products.php" class="<?= $currentPage === 'products' || $currentPage === 'product-edit' ? 'active' : '' ?>">Products</a>
                 <a href="<?= BASE_URL ?>/admin/orders.php" class="<?= $currentPage === 'orders' || $currentPage === 'order-detail' ? 'active' : '' ?>">Orders</a>

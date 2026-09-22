@@ -877,7 +877,8 @@ p {
 .admin-header {
     background: var(--color-primary);
     color: white;
-    padding: var(--spacing-md) 0;
+    padding: 1rem 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .admin-nav {
@@ -887,18 +888,59 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
 }
 
-.admin-nav a {
+.admin-brand a {
     color: white;
-    margin-right: var(--spacing-md);
-    font-size: 0.95rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    white-space: nowrap;
     transition: color var(--transition-base);
 }
 
-.admin-nav a:hover,
-.admin-nav a.active {
+.admin-brand a:hover {
     color: var(--color-accent);
+}
+
+.admin-nav-links {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.admin-nav-links a {
+    color: white;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: color var(--transition-base);
+    padding: 0.5rem 0;
+}
+
+.admin-nav-links a:hover,
+.admin-nav-links a.active {
+    color: var(--color-accent);
+}
+
+/* Responsive admin nav */
+@media (max-width: 768px) {
+    .admin-nav {
+        gap: var(--spacing-sm);
+    }
+    
+    .admin-brand a {
+        font-size: 1rem;
+    }
+    
+    .admin-nav-links {
+        gap: var(--spacing-sm);
+    }
+    
+    .admin-nav-links a {
+        font-size: 0.875rem;
+    }
 }
 
 .admin-content {
