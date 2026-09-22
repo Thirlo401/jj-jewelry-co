@@ -1,17 +1,17 @@
 <?php
 $pageTitle = 'About Us';
-$pageDescription = 'Learn about JJ Jewelry & Co, South Africa\'s premier destination for exceptional diamonds and fine jewelry.';
+$pageDescription = 'Learn about SS Jewellery, South Africa\'s premier destination for exceptional diamonds and fine jewelry.';
 require_once __DIR__ . '/includes/header.php';
 ?>
 
 <div class="container">
     <div style="padding: var(--spacing-xl) 0; max-width: 800px; margin: 0 auto;">
-        <h1>About JJ Jewelry & Co</h1>
+        <h1>About SS Jewellery</h1>
         
         <div style="margin: var(--spacing-lg) 0; line-height: 1.8;">
             <h2>Our Story</h2>
             <p>
-                JJ Jewelry & Co has been a trusted name in the South African diamond and jewelry industry, 
+                SS Jewellery has been a trusted name in the South African diamond and jewelry industry, 
                 offering exceptional quality rough diamonds, expertly cut polished diamonds, and exquisite 
                 fine jewelry to discerning collectors and jewelry enthusiasts.
             </p>

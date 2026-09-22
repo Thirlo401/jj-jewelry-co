@@ -1,4 +1,4 @@
-# JJ Jewelry & Co - E-commerce Platform
+# SS Jewellery - E-commerce Platform
 
 A complete, production-ready online shop for selling rough diamonds, polished diamonds, and fine jewelry. Built for standard cPanel hosting with PHP and MySQL.
 
@@ -202,7 +202,7 @@ Regular backups recommended:
 
 ## License
 
-Proprietary - All rights reserved by JJ Jewelry & Co
+Proprietary - All rights reserved by SS Jewellery
 
 ---
 

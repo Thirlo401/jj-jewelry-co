@@ -1,4 +1,4 @@
--- JJ Jewelry & Co Database Schema
+-- SS Jewellery Database Schema
 -- For MySQL 5.7+ / MariaDB 10.2+
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";

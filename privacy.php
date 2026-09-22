@@ -13,7 +13,7 @@ require_once __DIR__ . '/includes/header.php';
         <div style="line-height: 1.8;">
             <h2>Introduction</h2>
             <p>
-                JJ Jewelry & Co ("we", "our", "us") respects your privacy and is committed to protecting 
+                SS Jewellery ("we", "our", "us") respects your privacy and is committed to protecting 
                 your personal information. This Privacy Policy explains how we collect, use, disclose, 
                 and safeguard your information when you visit our website and make purchases.
             </p>
@@ -89,7 +89,7 @@ require_once __DIR__ . '/includes/header.php';
                 please contact us at:
             </p>
             <p>
-                <strong>Email:</strong> <?= e(getSetting('store_email', 'info@jjjewelry.co.za')) ?><br>
+                <strong>Email:</strong> <?= e(getSetting('store_email', 'info@ssjewellery.store')) ?><br>
                 <strong>Phone:</strong> <?= e(getSetting('store_phone', '+27 11 123 4567')) ?>
             </p>
             

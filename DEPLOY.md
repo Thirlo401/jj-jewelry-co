@@ -1,6 +1,6 @@
 # Deployment Guide for cPanel Hosting
 
-Complete step-by-step instructions for deploying JJ Jewelry & Co to cPanel hosting.
+Complete step-by-step instructions for deploying SS Jewellery to cPanel hosting.
 
 ## Prerequisites
 
@@ -102,7 +102,7 @@ define('DB_PASS', 'your_database_password');   // Your database password
 
 // Site Configuration
 define('BASE_URL', 'https://yourdomain.com');  // Your domain (no trailing slash)
-define('SITE_NAME', 'JJ Jewelry & Co');
+define('SITE_NAME', 'SS Jewellery');
 ```
 
 4. **Important**: Set error reporting for production:
@@ -149,7 +149,7 @@ chmod 755 assets/uploads/products
 ### Step 7: Verify Installation
 
 1. **Visit your website**: `https://yourdomain.com`
-   - You should see the JJ Jewelry & Co homepage
+   - You should see the SS Jewellery homepage
    - Sample products should be visible
    - If you see errors, check:
      - Database connection details in `config.php`
@@ -397,4 +397,4 @@ For hosting-specific issues:
 - [ ] HTTPS enabled
 - [ ] Backups configured
 
-**Congratulations!** Your JJ Jewelry & Co shop is now live and ready to accept orders.
+**Congratulations!** Your SS Jewellery shop is now live and ready to accept orders.

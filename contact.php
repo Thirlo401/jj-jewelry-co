@@ -1,9 +1,9 @@
 <?php
 $pageTitle = 'Contact Us';
-$pageDescription = 'Get in touch with JJ Jewelry & Co for inquiries about our diamonds and jewelry collection.';
+$pageDescription = 'Get in touch with SS Jewellery for inquiries about our diamonds and jewelry collection.';
 require_once __DIR__ . '/includes/header.php';
 
-$storeEmail = getSetting('store_email', 'info@jjjewelry.co.za');
+$storeEmail = getSetting('store_email', 'info@ssjewellery.store');
 $storePhone = getSetting('store_phone', '+27 11 123 4567');
 ?>
 
@@ -53,7 +53,7 @@ $storePhone = getSetting('store_phone', '+27 11 123 4567');
                 </p>
                 
                 <div style="background: var(--color-bg-light); padding: var(--spacing-md); border-radius: var(--border-radius); margin: var(--spacing-md) 0;">
-                    <strong>JJ Jewelry & Co Showroom</strong><br>
+                    <strong>SS Jewellery Showroom</strong><br>
                     <span style="color: var(--color-text-light);">
                         [Address details available upon request]<br>
                         Johannesburg, Gauteng<br>

@@ -13,7 +13,7 @@ require_once __DIR__ . '/includes/header.php';
         <div style="line-height: 1.8;">
             <h2>Agreement to Terms</h2>
             <p>
-                By accessing and using the JJ Jewelry & Co website, you agree to be bound by these 
+                By accessing and using the SS Jewellery website, you agree to be bound by these 
                 Terms of Service. If you do not agree to these terms, please do not use our website 
                 or services.
             </p>
@@ -61,7 +61,7 @@ require_once __DIR__ . '/includes/header.php';
             
             <h3>Risk of Loss</h3>
             <p>
-                All items purchased from JJ Jewelry & Co are shipped with insurance. Risk of loss and 
+                All items purchased from SS Jewellery are shipped with insurance. Risk of loss and 
                 title for purchased items pass to you upon delivery to the shipping carrier.
             </p>
             
@@ -86,14 +86,14 @@ require_once __DIR__ . '/includes/header.php';
             
             <h2>Product Authenticity</h2>
             <p>
-                All diamonds sold by JJ Jewelry & Co are genuine and natural unless otherwise specified. 
+                All diamonds sold by SS Jewellery are genuine and natural unless otherwise specified. 
                 Polished diamonds come with certification from recognized gemological institutes. We 
                 guarantee the authenticity of all products sold.
             </p>
             
             <h2>Limitation of Liability</h2>
             <p>
-                To the fullest extent permitted by law, JJ Jewelry & Co shall not be liable for any 
+                To the fullest extent permitted by law, SS Jewellery shall not be liable for any 
                 indirect, incidental, special, consequential, or punitive damages arising from your use 
                 of our website or products.
             </p>
@@ -101,7 +101,7 @@ require_once __DIR__ . '/includes/header.php';
             <h2>Intellectual Property</h2>
             <p>
                 All content on this website, including text, images, logos, and designs, is the property 
-                of JJ Jewelry & Co and is protected by copyright and trademark laws. Unauthorized use 
+                of SS Jewellery and is protected by copyright and trademark laws. Unauthorized use 
                 is prohibited.
             </p>
             
@@ -129,7 +129,7 @@ require_once __DIR__ . '/includes/header.php';
                 For questions about these Terms of Service, please contact us at:
             </p>
             <p>
-                <strong>Email:</strong> <?= e(getSetting('store_email', 'info@jjjewelry.co.za')) ?><br>
+                <strong>Email:</strong> <?= e(getSetting('store_email', 'info@ssjewellery.store')) ?><br>
                 <strong>Phone:</strong> <?= e(getSetting('store_phone', '+27 11 123 4567')) ?>
             </p>
         </div>
