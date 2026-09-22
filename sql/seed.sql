@@ -2,8 +2,10 @@
 -- Default admin user and sample products
 
 -- Insert default admin user
--- Username: admin
+-- Username: admin  
 -- Password: changeme123 (MUST be changed after first login!)
+-- NOTE: If password doesn't work, run: php generate_admin_hash.php
+--       to generate a new hash, then update this line or run UPDATE query
 INSERT INTO `admin_users` (`username`, `password`, `email`) VALUES
 ('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@jjjewelry.co.za');
 

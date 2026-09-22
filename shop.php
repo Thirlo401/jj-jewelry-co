@@ -34,8 +34,11 @@ $products = db()->fetchAll($sql, $params);
 ?>
 
 <div class="container">
-    <div style="padding: var(--spacing-lg) 0;">
-        <h1>Shop Our Collection</h1>
+    <div style="padding: var(--spacing-xl) 0;">
+        <h1 style="margin-bottom: var(--spacing-md);">Shop Our Collection</h1>
+        <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: var(--spacing-lg);">
+            Discover our exquisite selection of diamonds and fine jewelry
+        </p>
         
         <div class="shop-header">
             <div class="filter-group">
@@ -90,8 +93,8 @@ $products = db()->fetchAll($sql, $params);
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
-            <div style="text-align: center; padding: var(--spacing-xl); color: var(--color-text-light);">
-                <h3>No products found</h3>
+            <div style="text-align: center; padding: var(--spacing-2xl); color: var(--color-text-light);">
+                <h3 style="margin-bottom: var(--spacing-sm);">No products found</h3>
                 <p>Please try a different filter.</p>
             </div>
         <?php endif; ?>

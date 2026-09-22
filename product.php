@@ -36,6 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
 ?>
 
 <div class="container">
+    <div style="padding: var(--spacing-md) 0;">
+        <a href="<?= BASE_URL ?>/shop.php" style="color: var(--color-text-light); font-size: 0.95rem; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: var(--spacing-md);">
+            ← Back to Shop
+        </a>
+    </div>
+    
     <div class="product-detail">
         <div class="product-detail-image">
             <?php if ($product['image_main']): ?>
@@ -92,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                 
                 <div class="meta-item">
                     <span class="meta-label">Availability:</span>
-                    <span class="meta-value">
+                    <span class="meta-value" style="color: <?= $product['stock_quantity'] > 0 ? 'var(--color-success)' : 'var(--color-error)' ?>">
                         <?php if ($product['stock_quantity'] > 0): ?>
                             <?= $product['stock_quantity'] ?> in stock
                         <?php else: ?>
@@ -103,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
             </div>
             
             <?php if ($product['stock_quantity'] > 0): ?>
-                <form method="POST" style="margin-top: var(--spacing-md);">
+                <form method="POST" style="margin-top: var(--spacing-lg);">
                     <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
                     
                     <div class="form-group">
@@ -111,11 +117,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
                         <input type="number" name="quantity" value="1" min="1" max="<?= $product['stock_quantity'] ?>" class="form-input" style="width: 100px;">
                     </div>
                     
-                    <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
-                    <a href="<?= BASE_URL ?>/shop.php" class="btn btn-outline">Continue Shopping</a>
+                    <div style="display: flex; gap: var(--spacing-sm); flex-wrap: wrap;">
+                        <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
+                        <a href="<?= BASE_URL ?>/shop.php" class="btn btn-outline">Continue Shopping</a>
+                    </div>
                 </form>
             <?php else: ?>
-                <div class="alert alert-warning">
+                <div class="alert alert-warning" style="margin-top: var(--spacing-lg);">
                     This item is currently out of stock. Please contact us for availability.
                 </div>
                 <a href="<?= BASE_URL ?>/contact.php" class="btn btn-accent">Contact Us</a>

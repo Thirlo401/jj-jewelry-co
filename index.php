@@ -14,7 +14,16 @@ $featuredProducts = db()->fetchAll(
     <div class="container">
         <h1>Timeless Elegance</h1>
         <p>Discover exceptional diamonds and fine jewelry crafted to perfection</p>
-        <a href="<?= BASE_URL ?>/shop.php" class="btn btn-primary">Explore Our Collection</a>
+        <div class="hero-actions">
+            <a href="<?= BASE_URL ?>/shop.php" class="btn btn-primary">Explore Our Collection</a>
+            <a href="<?= BASE_URL ?>/about.php" class="btn btn-outline">Our Story</a>
+        </div>
+        
+        <div class="trust-strip">
+            <span>Certified Diamonds</span>
+            <span>Ethical Sourcing</span>
+            <span>Secure Checkout</span>
+        </div>
     </div>
 </section>
 
@@ -48,37 +57,37 @@ $featuredProducts = db()->fetchAll(
                 <?php endforeach; ?>
             </div>
         <?php else: ?>
-            <p style="text-align: center; color: var(--color-text-light);">No featured products available at this time.</p>
+            <p style="text-align: center; color: var(--color-text-light); padding: var(--spacing-xl);">No featured products available at this time.</p>
         <?php endif; ?>
         
-        <div style="text-align: center; margin-top: var(--spacing-lg);">
+        <div style="text-align: center; margin-top: var(--spacing-xl);">
             <a href="<?= BASE_URL ?>/shop.php" class="btn btn-outline">View All Products</a>
         </div>
     </div>
 </section>
 
-<section class="section" style="background: var(--color-bg-light);">
+<section class="section" style="background: var(--color-bg-alt);">
     <div class="container">
         <div class="section-header">
             <h2 class="section-title">Our Collections</h2>
         </div>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md);">
-            <div style="text-align: center; padding: var(--spacing-lg);">
+        <div class="collection-grid">
+            <div class="collection-card">
                 <h3>Rough Diamonds</h3>
-                <p style="color: var(--color-text-light); margin: var(--spacing-sm) 0;">Uncut natural diamonds for collectors and custom jewelry</p>
+                <p>Uncut natural diamonds for collectors and custom jewelry</p>
                 <a href="<?= BASE_URL ?>/shop.php?category=rough_diamonds" class="btn btn-accent btn-sm">Explore</a>
             </div>
             
-            <div style="text-align: center; padding: var(--spacing-lg);">
+            <div class="collection-card">
                 <h3>Polished Diamonds</h3>
-                <p style="color: var(--color-text-light); margin: var(--spacing-sm) 0;">Expertly cut and certified diamonds of exceptional quality</p>
+                <p>Expertly cut and certified diamonds of exceptional quality</p>
                 <a href="<?= BASE_URL ?>/shop.php?category=polished_diamonds" class="btn btn-accent btn-sm">Explore</a>
             </div>
             
-            <div style="text-align: center; padding: var(--spacing-lg);">
+            <div class="collection-card">
                 <h3>Fine Jewelry</h3>
-                <p style="color: var(--color-text-light); margin: var(--spacing-sm) 0;">Exquisite engagement rings, bracelets, and custom pieces</p>
+                <p>Exquisite engagement rings, bracelets, and custom pieces</p>
                 <a href="<?= BASE_URL ?>/shop.php?category=jewelry" class="btn btn-accent btn-sm">Explore</a>
             </div>
         </div>

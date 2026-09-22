@@ -25,8 +25,8 @@ $cartTotal = calculateCartTotal(getCart());
 ?>
 
 <div class="container">
-    <div style="padding: var(--spacing-lg) 0;">
-        <h1>Shopping Cart</h1>
+    <div style="padding: var(--spacing-xl) 0;">
+        <h1 style="margin-bottom: var(--spacing-md);">Shopping Cart</h1>
         
         <?php if ($message = getFlashMessage('success')): ?>
             <div class="alert alert-success"><?= e($message) ?></div>
@@ -61,17 +61,17 @@ $cartTotal = calculateCartTotal(getCart());
                                             <img src="<?= BASE_URL ?>/assets/images/placeholder.jpg" alt="<?= e($item['name']) ?>" class="cart-product-image">
                                         <?php endif; ?>
                                         <div>
-                                            <strong><?= e($item['name']) ?></strong><br>
+                                            <strong style="font-family: var(--font-display); font-size: 1.125rem;"><?= e($item['name']) ?></strong><br>
                                             <small style="color: var(--color-text-light);"><?= e($item['sku']) ?></small>
                                         </div>
                                     </div>
                                 </td>
-                                <td><?= formatPrice($item['price']) ?></td>
+                                <td style="font-weight: 500;"><?= formatPrice($item['price']) ?></td>
                                 <td class="cart-quantity">
                                     <input type="number" name="quantity[<?= $item['id'] ?>]" value="<?= $item['quantity'] ?>" 
                                            min="1" max="<?= $item['stock_quantity'] ?>">
                                 </td>
-                                <td><strong><?= formatPrice($item['subtotal']) ?></strong></td>
+                                <td><strong style="color: var(--color-accent); font-family: var(--font-display); font-size: 1.25rem;"><?= formatPrice($item['subtotal']) ?></strong></td>
                                 <td>
                                     <button type="submit" name="remove_item" value="1" 
                                             onclick="this.form.product_id.value = <?= $item['id'] ?>"
@@ -85,7 +85,7 @@ $cartTotal = calculateCartTotal(getCart());
                     </tbody>
                 </table>
                 
-                <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-md);">
+                <div style="display: flex; justify-content: space-between; margin-top: var(--spacing-lg); gap: var(--spacing-md); flex-wrap: wrap;">
                     <a href="<?= BASE_URL ?>/shop.php" class="btn btn-outline">Continue Shopping</a>
                     <button type="submit" name="update_cart" class="btn btn-primary">Update Cart</button>
                 </div>
@@ -97,15 +97,15 @@ $cartTotal = calculateCartTotal(getCart());
                     <span>Total:</span>
                     <span><?= formatPrice($cartTotal) ?></span>
                 </div>
-                <a href="<?= BASE_URL ?>/checkout.php" class="btn btn-accent" style="width: 100%; margin-top: var(--spacing-md);">
+                <a href="<?= BASE_URL ?>/checkout.php" class="btn btn-accent" style="width: 100%; margin-top: var(--spacing-md); text-align: center;">
                     Proceed to Checkout
                 </a>
             </div>
         <?php else: ?>
-            <div style="text-align: center; padding: var(--spacing-xl); color: var(--color-text-light);">
-                <h3>Your cart is empty</h3>
-                <p>Add some beautiful pieces to your cart to get started.</p>
-                <a href="<?= BASE_URL ?>/shop.php" class="btn btn-primary" style="margin-top: var(--spacing-md);">
+            <div style="text-align: center; padding: var(--spacing-2xl); background: var(--color-bg-white); border: 1px solid var(--color-border); border-radius: var(--border-radius);">
+                <h3 style="margin-bottom: var(--spacing-md);">Your cart is empty</h3>
+                <p style="color: var(--color-text-light); margin-bottom: var(--spacing-lg);">Add some beautiful pieces to your cart to get started.</p>
+                <a href="<?= BASE_URL ?>/shop.php" class="btn btn-primary">
                     Start Shopping
                 </a>
             </div>
