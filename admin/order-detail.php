@@ -34,6 +34,12 @@ if (!$order) {
 
 // Get order items
 $orderItems = db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$orderId]);
+
+// Create product summary for payment reference
+$productNames = array_map(function($item) {
+    return $item['product_name'];
+}, $orderItems);
+$paymentForText = implode(', ', $productNames);
 ?>
 
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
@@ -159,6 +165,35 @@ $orderItems = db()->fetchAll("SELECT * FROM order_items WHERE order_id = ?", [$o
                 </div>
             </div>
         </div>
+        
+        <?php if ($order['payment_method'] === 'eft'): ?>
+            <div class="admin-card" style="background: var(--color-bg-light);">
+                <h3>EFT Payment Reference</h3>
+                
+                <div style="padding: var(--spacing-sm); background: white; border-left: 3px solid var(--color-accent); border-radius: 4px; margin-bottom: var(--spacing-sm);">
+                    <div style="font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0.25rem;">
+                        <strong>Payment Reference:</strong>
+                    </div>
+                    <div style="font-size: 1.1rem; font-weight: 700; color: var(--color-accent); font-family: monospace;">
+                        <?= e($order['order_number']) ?>
+                    </div>
+                </div>
+                
+                <div style="font-size: 0.9rem; color: var(--color-text-light); line-height: 1.6;">
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong style="color: var(--color-text);">Amount Due:</strong> 
+                        <span style="color: var(--color-accent); font-weight: 600;"><?= formatPrice($order['total_amount']) ?></span>
+                    </div>
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong style="color: var(--color-text);">Paying for:</strong><br>
+                        <?= e($paymentForText) ?>
+                    </div>
+                    <div style="margin-top: var(--spacing-sm); padding-top: var(--spacing-sm); border-top: 1px solid var(--color-border); font-size: 0.85rem; font-style: italic;">
+                        Customer was instructed to use order number as bank transfer reference.
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

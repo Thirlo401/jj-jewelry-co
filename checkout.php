@@ -169,12 +169,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                         <h3>Payment Method</h3>
                         
                         <div style="margin-bottom: var(--spacing-md);">
-                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: var(--spacing-sm); background: var(--color-bg-light); border-radius: var(--border-radius);">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: var(--spacing-sm); background: linear-gradient(135deg, #f8f4f0 0%, #f5f0ea 100%); border: 2px solid var(--color-accent); border-radius: var(--border-radius);">
                                 <input type="radio" name="payment_method" value="eft" checked>
-                                <strong>EFT / Bank Transfer</strong>
+                                <strong style="color: var(--color-text);">EFT / Bank Transfer</strong>
+                                <span style="margin-left: auto; background: var(--color-accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">PREFERRED</span>
                             </label>
-                            <div style="padding: var(--spacing-sm); background: var(--color-bg-light); margin-top: 0.5rem; font-size: 0.95rem; color: var(--color-text-light);">
-                                Bank details will be provided after order confirmation. Please use your order number as payment reference.
+                            <div style="padding: var(--spacing-md); background: white; margin-top: 0.5rem; font-size: 0.95rem; border-left: 3px solid var(--color-accent); line-height: 1.6;">
+                                <strong style="color: var(--color-text);">Complete your order now &mdash; payment details provided next.</strong><br>
+                                After confirming your order, you'll receive complete banking details along with your unique order reference number. Simply make an EFT payment using your order number as the payment reference, and we'll process your order once payment is received.
+                                <?php if (!getSetting('payfast_merchant_id')): ?>
+                                    <div style="margin-top: 0.75rem; padding: 0.5rem; background: var(--color-bg-light); border-radius: 4px; font-size: 0.9rem;">
+                                        <em>Online card payment option coming soon.</em>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                         
