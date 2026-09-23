@@ -1,7 +1,7 @@
 BYL JEWELLERY PRICE SHEET
 SS Jewellery (ssjewellery.store)
-Generated: 2026-09-23 18:36:10
-Total Products: 60
+Generated: 2026-09-23 18:40:49
+Total Products: 59
 
 Pricing: BYL Wholesale + 15% Markup (ZAR)
 All prices are in South African Rand (ZAR)
@@ -47,7 +47,6 @@ BYL-JW-SABR231B | Round Brilliant Cut Diamond Bracelet - White Gold  | R  16,929
 BYL-JW-SABR231C | Round Brilliant Cut Diamond Bracelet - White Gold  | R  16,929.00 | R  19,468.35 | Bracelets
 BYL-JW-SABR230A | Round Brilliant Cut Diamond Bracelet - Yellow Gold | R  17,195.00 | R  19,774.25 | Bracelets
 BYL-JW-12652    | Fancy Intense Yellow Multi Shaped Diamond Pendant  | R 123,670.00 | R 142,220.50 | Pendants
-BYL-JW-13158    | Pear Shape Black Diamond, Emerald & Double Halo Di | R  44,405.00 | R  51,065.75 | Pendants
 BYL-JW-12931    | Marquise Cut Fancy Yellow Double Halo Diamond Pend | R 285,205.00 | R 327,985.75 | Pendants
 BYL-JW-12558    | Round Brilliant Circle Diamond Pendant - Rose Gold | R  29,430.00 | R  33,844.50 | Pendants
 BYL-JW-10557    | Round Brilliant Diamond Pendant - Rose Gold        | R  35,990.00 | R  41,388.50 | Pendants
@@ -78,5 +77,5 @@ SUMMARY BY CATEGORY
 Rings          : 12 products | Total Retail Value: R 226,088.85
 Earrings       : 12 products | Total Retail Value: R 727,076.00
 Bracelets      : 12 products | Total Retail Value: R 228,682.10
-Pendants       : 12 products | Total Retail Value: R 853,921.00
+Pendants       : 11 products | Total Retail Value: R 802,855.25
 Necklaces      : 12 products | Total Retail Value: R 669,958.95

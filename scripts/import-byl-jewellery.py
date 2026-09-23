@@ -59,13 +59,33 @@ def main():
         'diamond-necklaces': 'necklaces',
     }
     
-    # Read CSV
+    # Read CSV - handle both standard format and quoted format
     products = []
     price_sheet = []
     
     with open(csv_file, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        rows = list(reader)
+        # Read first line to detect format
+        first_line = f.readline().strip()
+        f.seek(0)
+        
+        # If the CSV is wrapped in quotes (entire row as one field), parse manually
+        if first_line.startswith('"') and ',' in first_line and first_line.count(',') > 5:
+            # Manually parse quoted CSV format
+            all_lines = f.readlines()
+            headers = all_lines[0].strip().strip('"').split(',')
+            rows = []
+            for line in all_lines[1:]:
+                line = line.strip()
+                if line and line.startswith('"'):
+                    # Remove outer quotes and split
+                    line = line.strip('"')
+                    fields = line.split(',')
+                    if len(fields) == len(headers):
+                        rows.append(dict(zip(headers, fields)))
+        else:
+            # Standard CSV format
+            reader = csv.DictReader(f)
+            rows = list(reader)
     
     print(f"Processing {len(rows)} products from CSV...\n")
     
