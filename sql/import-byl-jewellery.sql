@@ -1,6 +1,6 @@
 -- BYL Jewellery Import
--- Generated: 2026-09-23 18:40:49
--- Total Products: 59
+-- Generated: 2026-09-23 18:42:00
+-- Total Products: 60
 -- Pricing: BYL wholesale + 15% markup (ZAR)
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -344,7 +344,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12931', 'Marquise Cut Fancy Yellow Double Halo Diamond Pendant - Yellow Gold', 'marquise-cut-fancy-yellow-double-halo-diamond-pendant-12931', 'pendants', 'Diamond Pendants in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 327985.75, 'byl_12931_37.jpg', 1, 0, 1)
+('BYL-JW-13158', 'Pear Shape Black Diamond, Emerald & Double Halo Diamond Pendant - Yellow Gold', 'pear-shape-black-diamond-emerald-double-halo-diamond-pendant-13158', 'pendants', 'Diamond Pendants in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 51065.75, 'byl_13158_37.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -353,7 +353,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12558', 'Round Brilliant Circle Diamond Pendant - Rose Gold', 'round-brilliant-circle-diamond-pendant-12558', 'pendants', 'Diamond Pendants in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33844.50, 'byl_12558_38.jpg', 1, 0, 1)
+('BYL-JW-12931', 'Marquise Cut Fancy Yellow Double Halo Diamond Pendant - Yellow Gold', 'marquise-cut-fancy-yellow-double-halo-diamond-pendant-12931', 'pendants', 'Diamond Pendants in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 327985.75, 'byl_12931_38.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -362,7 +362,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-10557', 'Round Brilliant Diamond Pendant - Rose Gold', 'round-brilliant-diamond-pendant-10557', 'pendants', 'Diamond Pendants in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 41388.50, 'byl_10557_39.jpg', 1, 0, 1)
+('BYL-JW-12558', 'Round Brilliant Circle Diamond Pendant - Rose Gold', 'round-brilliant-circle-diamond-pendant-12558', 'pendants', 'Diamond Pendants in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33844.50, 'byl_12558_39.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -371,7 +371,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-UPID3772', 'Round Brilliant Solitaire Diamond Pendant - White Gold', 'round-brilliant-solitaire-diamond-pendant-upid3772', 'pendants', 'Solitaire Diamond Pendant in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22114.50, 'byl_UPID3772_40.jpg', 1, 0, 1)
+('BYL-JW-10557', 'Round Brilliant Diamond Pendant - Rose Gold', 'round-brilliant-diamond-pendant-10557', 'pendants', 'Diamond Pendants in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 41388.50, 'byl_10557_40.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -380,7 +380,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12043', 'Fancy Light Yellow Radiant Cut Halo Diamond Pendant - Yellow Gold', 'fancy-light-yellow-radiant-cut-halo-diamond-pendant-12043', 'pendants', 'Fancy Yellow Pendants in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 96600.00, 'byl_12043_41.png', 1, 0, 1)
+('BYL-JW-UPID3772', 'Round Brilliant Solitaire Diamond Pendant - White Gold', 'round-brilliant-solitaire-diamond-pendant-upid3772', 'pendants', 'Solitaire Diamond Pendant in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22114.50, 'byl_UPID3772_41.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -389,7 +389,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12685', 'Round Brilliant Solitaire Diamond Pendant - Rose Gold', 'round-brilliant-solitaire-diamond-pendant-12685', 'pendants', 'Solitaire Diamond Pendant in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22091.50, 'byl_12685_42.jpg', 1, 0, 1)
+('BYL-JW-12043', 'Fancy Light Yellow Radiant Cut Halo Diamond Pendant - Yellow Gold', 'fancy-light-yellow-radiant-cut-halo-diamond-pendant-12043', 'pendants', 'Fancy Yellow Pendants in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 96600.00, 'byl_12043_42.png', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -398,7 +398,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12684', 'Round Brilliant Solitaire Diamond Pendant - Rose Gold', 'round-brilliant-solitaire-diamond-pendant-12684', 'pendants', 'Solitaire Diamond Pendant in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22298.50, 'byl_12684_43.jpg', 1, 0, 1)
+('BYL-JW-12685', 'Round Brilliant Solitaire Diamond Pendant - Rose Gold', 'round-brilliant-solitaire-diamond-pendant-12685', 'pendants', 'Solitaire Diamond Pendant in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22091.50, 'byl_12685_43.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -407,7 +407,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12563', 'Round Brilliant Circle Diamond Pendant - White Gold', 'round-brilliant-circle-diamond-pendant-12563', 'pendants', 'Diamond Pendants in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 36064.00, 'byl_12563_44.jpg', 1, 0, 1)
+('BYL-JW-12684', 'Round Brilliant Solitaire Diamond Pendant - Rose Gold', 'round-brilliant-solitaire-diamond-pendant-12684', 'pendants', 'Solitaire Diamond Pendant in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 22298.50, 'byl_12684_44.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -416,7 +416,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12093', 'Round Brilliant Teardrop Diamond Pendant - White Gold', 'round-brilliant-teardrop-diamond-pendant-12093', 'pendants', 'Solitaire Diamond Pendant in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 28934.00, 'byl_12093_45.jpg', 1, 0, 1)
+('BYL-JW-12563', 'Round Brilliant Circle Diamond Pendant - White Gold', 'round-brilliant-circle-diamond-pendant-12563', 'pendants', 'Diamond Pendants in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 36064.00, 'byl_12563_45.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -425,7 +425,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-11988', 'Round Brilliant Halo Diamond Pendant - White Gold', 'round-brilliant-halo-diamond-pendant-11988', 'pendants', 'Diamond Pendants in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 29313.50, 'byl_11988_46.jpg', 1, 0, 1)
+('BYL-JW-12093', 'Round Brilliant Teardrop Diamond Pendant - White Gold', 'round-brilliant-teardrop-diamond-pendant-12093', 'pendants', 'Solitaire Diamond Pendant in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 28934.00, 'byl_12093_46.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -434,7 +434,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12706', 'Round Brilliant Diamond Tennis Necklace - Yellow Gold', 'round-brilliant-diamond-tennis-necklace-12706', 'necklaces', 'Tennis Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 62399.00, 'byl_12706_47.jpg', 1, 0, 1)
+('BYL-JW-11988', 'Round Brilliant Halo Diamond Pendant - White Gold', 'round-brilliant-halo-diamond-pendant-11988', 'pendants', 'Diamond Pendants in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 29313.50, 'byl_11988_47.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -443,7 +443,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK231', 'Round Brilliant Diamond Bezel Set Three-Tone Necklace - Three-Tone Gold', 'round-brilliant-diamond-bezel-set-three-tone-necklace-neck231', 'necklaces', 'Diamond Necklace in Three-Tone Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33361.50, 'byl_NECK231_48.png', 1, 0, 1)
+('BYL-JW-12706', 'Round Brilliant Diamond Tennis Necklace - Yellow Gold', 'round-brilliant-diamond-tennis-necklace-12706', 'necklaces', 'Tennis Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 62399.00, 'byl_12706_48.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -452,7 +452,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12715', 'Round Brilliant Diamond Tennis Necklace - White Gold', 'round-brilliant-diamond-tennis-necklace-12715', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 132629.50, 'byl_12715_49.jpg', 1, 0, 1)
+('BYL-JW-NECK231', 'Round Brilliant Diamond Bezel Set Three-Tone Necklace - Three-Tone Gold', 'round-brilliant-diamond-bezel-set-three-tone-necklace-neck231', 'necklaces', 'Diamond Necklace in Three-Tone Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33361.50, 'byl_NECK231_49.png', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -461,7 +461,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12708', 'Round Brilliant Diamond Tennis Necklace - Yellow Gold', 'round-brilliant-diamond-tennis-necklace-12708', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 183586.00, 'byl_12708_50.jpg', 1, 0, 1)
+('BYL-JW-12715', 'Round Brilliant Diamond Tennis Necklace - White Gold', 'round-brilliant-diamond-tennis-necklace-12715', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 132629.50, 'byl_12715_50.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -470,7 +470,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-12049', 'Round Brilliant Illusion Set Diamond Cluster Necklace - White Gold', 'round-brilliant-illusion-set-diamond-cluster-necklace-12049', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33452.35, 'byl_12049_51.jpg', 1, 0, 1)
+('BYL-JW-12708', 'Round Brilliant Diamond Tennis Necklace - Yellow Gold', 'round-brilliant-diamond-tennis-necklace-12708', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 183586.00, 'byl_12708_51.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -479,7 +479,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK227B', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck227b', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK227B_52.jpg', 1, 0, 1)
+('BYL-JW-12049', 'Round Brilliant Illusion Set Diamond Cluster Necklace - White Gold', 'round-brilliant-illusion-set-diamond-cluster-necklace-12049', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33452.35, 'byl_12049_52.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -488,7 +488,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK227A', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck227a', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK227A_53.jpg', 1, 0, 1)
+('BYL-JW-NECK227B', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck227b', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK227B_53.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -497,7 +497,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK224C', 'Round Brilliant Diamond Necklace - Yellow Gold', 'round-brilliant-diamond-necklace-neck224c', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK224C_54.jpg', 1, 0, 1)
+('BYL-JW-NECK227A', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck227a', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK227A_54.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -506,7 +506,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK223B', 'Round Brilliant Diamond Necklace - Yellow Gold', 'round-brilliant-diamond-necklace-neck223b', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 32447.25, 'byl_NECK223B_55.jpg', 1, 0, 1)
+('BYL-JW-NECK224C', 'Round Brilliant Diamond Necklace - Yellow Gold', 'round-brilliant-diamond-necklace-neck224c', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK224C_55.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -515,7 +515,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK222C', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck222c', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK222C_56.jpg', 1, 0, 1)
+('BYL-JW-NECK223B', 'Round Brilliant Diamond Necklace - Yellow Gold', 'round-brilliant-diamond-necklace-neck223b', 'necklaces', 'Diamond Necklace in Yellow Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 32447.25, 'byl_NECK223B_56.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -524,7 +524,7 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-NECK228A', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck228a', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 29497.50, 'byl_NECK228A_57.jpg', 1, 0, 1)
+('BYL-JW-NECK222C', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck222c', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 33933.05, 'byl_NECK222C_57.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
@@ -533,7 +533,16 @@ ON DUPLICATE KEY UPDATE
   `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
 
 INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
-('BYL-JW-11728', 'Round Brilliant Diamond Cluster Necklace - Rose Gold', 'round-brilliant-diamond-cluster-necklace-11728', 'necklaces', 'Diamond Necklace in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 26853.65, 'byl_11728_58.jpg', 1, 0, 1)
+('BYL-JW-NECK228A', 'Round Brilliant Diamond Necklace - White Gold', 'round-brilliant-diamond-necklace-neck228a', 'necklaces', 'Diamond Necklace in White Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 29497.50, 'byl_NECK228A_58.jpg', 1, 0, 1)
+ON DUPLICATE KEY UPDATE
+  `name` = VALUES(`name`),
+  `description` = VALUES(`description`),
+  `price` = VALUES(`price`),
+  `category` = VALUES(`category`),
+  `image_main` = COALESCE(VALUES(`image_main`), `image_main`);
+
+INSERT INTO `products` (`sku`, `name`, `slug`, `category`, `description`, `price`, `image_main`, `stock_quantity`, `is_featured`, `is_active`) VALUES
+('BYL-JW-11728', 'Round Brilliant Diamond Cluster Necklace - Rose Gold', 'round-brilliant-diamond-cluster-necklace-11728', 'necklaces', 'Diamond Necklace in Rose Gold. SS Jewellery reseller stock from BYL Diamonds collection.', 26853.65, 'byl_11728_59.jpg', 1, 0, 1)
 ON DUPLICATE KEY UPDATE
   `name` = VALUES(`name`),
   `description` = VALUES(`description`),
