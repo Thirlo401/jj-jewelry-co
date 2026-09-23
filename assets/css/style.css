@@ -274,6 +274,38 @@ p {
     pointer-events: none;
 }
 
+/* Hero with background image */
+.hero-with-bg {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 26, 26, 0.45);
+    z-index: 0;
+}
+
+.hero-with-bg .hero-overlay {
+    display: block;
+}
+
+.hero-with-bg h1,
+.hero-with-bg p,
+.hero-with-bg .trust-strip span {
+    color: white;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.hero-with-bg .trust-strip {
+    border-top-color: rgba(255, 255, 255, 0.2);
+}
+
 .hero .container {
     position: relative;
     z-index: 1;

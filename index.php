@@ -1,27 +1,39 @@
 <?php
-$pageTitle = 'Finest Diamonds & Jewelry in South Africa';
-$pageDescription = 'Discover exceptional rough diamonds, polished diamonds, and exquisite jewelry from JJ Jewelry & Co.';
+$pageTitle = 'Finest Jewellery in South Africa';
+$pageDescription = 'Discover exquisite rings, earrings, bracelets, necklaces and pendants from SS Jewellery.';
 
 require_once __DIR__ . '/includes/header.php';
 
-// Get featured products
+// Get featured products (jewellery only - public categories)
 $featuredProducts = db()->fetchAll(
-    "SELECT * FROM products WHERE is_featured = 1 AND is_active = 1 ORDER BY created_at DESC LIMIT 6"
+    "SELECT * FROM products 
+     WHERE is_featured = 1 AND is_active = 1 
+     AND category IN ('rings', 'earrings', 'bracelets', 'necklaces', 'pendants', 'jewelry')
+     ORDER BY created_at DESC LIMIT 6"
 );
+
+// Get hero background image
+$heroImage = getSetting('hero_background_image');
+$heroStyle = '';
+if (!empty($heroImage)) {
+    $heroImageUrl = UPLOAD_URL . e($heroImage);
+    $heroStyle = 'style="background-image: url(\'' . $heroImageUrl . '\');"';
+}
 ?>
 
-<section class="hero">
+<section class="hero hero-with-bg" <?= $heroStyle ?>>
+    <div class="hero-overlay"></div>
     <div class="container">
         <h1>Timeless Elegance</h1>
-        <p>Discover exceptional diamonds and fine jewelry crafted to perfection</p>
+        <p>Discover exquisite fine jewellery crafted to perfection</p>
         <div class="hero-actions">
             <a href="<?= BASE_URL ?>/shop.php" class="btn btn-primary">Explore Our Collection</a>
-            <a href="<?= BASE_URL ?>/about.php" class="btn btn-outline">Our Story</a>
+            <a href="<?= BASE_URL ?>/request-diamond.php" class="btn btn-outline">Request a Diamond</a>
         </div>
         
         <div class="trust-strip">
-            <span>Certified Diamonds</span>
-            <span>Ethical Sourcing</span>
+            <span>Fine Jewellery</span>
+            <span>Expert Craftsmanship</span>
             <span>Secure Checkout</span>
         </div>
     </div>
@@ -69,26 +81,45 @@ $featuredProducts = db()->fetchAll(
 <section class="section" style="background: var(--color-bg-alt);">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Our Collections</h2>
+            <h2 class="section-title">Our Jewellery Collections</h2>
+            <p class="section-subtitle">Exquisite pieces for every occasion</p>
         </div>
         
         <div class="collection-grid">
             <div class="collection-card">
-                <h3>Rough Diamonds</h3>
-                <p>Uncut natural diamonds for collectors and custom jewelry</p>
-                <a href="<?= BASE_URL ?>/shop.php?category=rough_diamonds" class="btn btn-accent btn-sm">Explore</a>
+                <h3>Rings</h3>
+                <p>Stunning engagement rings, eternity bands, and dress rings</p>
+                <a href="<?= BASE_URL ?>/shop.php?category=rings" class="btn btn-accent btn-sm">Explore</a>
             </div>
             
             <div class="collection-card">
-                <h3>Polished Diamonds</h3>
-                <p>Expertly cut and certified diamonds of exceptional quality</p>
-                <a href="<?= BASE_URL ?>/shop.php?category=polished_diamonds" class="btn btn-accent btn-sm">Explore</a>
+                <h3>Earrings</h3>
+                <p>Elegant studs, hoops, and drop earrings in precious metals</p>
+                <a href="<?= BASE_URL ?>/shop.php?category=earrings" class="btn btn-accent btn-sm">Explore</a>
             </div>
             
             <div class="collection-card">
-                <h3>Fine Jewelry</h3>
-                <p>Exquisite engagement rings, bracelets, and custom pieces</p>
-                <a href="<?= BASE_URL ?>/shop.php?category=jewelry" class="btn btn-accent btn-sm">Explore</a>
+                <h3>Bracelets</h3>
+                <p>Beautiful tennis bracelets and bangle designs</p>
+                <a href="<?= BASE_URL ?>/shop.php?category=bracelets" class="btn btn-accent btn-sm">Explore</a>
+            </div>
+            
+            <div class="collection-card">
+                <h3>Necklaces</h3>
+                <p>Timeless chains, statement pieces, and tennis necklaces</p>
+                <a href="<?= BASE_URL ?>/shop.php?category=necklaces" class="btn btn-accent btn-sm">Explore</a>
+            </div>
+            
+            <div class="collection-card">
+                <h3>Pendants</h3>
+                <p>Delicate solitaires, halos, and designer pendants</p>
+                <a href="<?= BASE_URL ?>/shop.php?category=pendants" class="btn btn-accent btn-sm">Explore</a>
+            </div>
+            
+            <div class="collection-card" style="background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%); color: white;">
+                <h3 style="color: white;">Looking for Diamonds?</h3>
+                <p style="color: rgba(255,255,255,0.9);">Request polished or rough diamonds from our specialists</p>
+                <a href="<?= BASE_URL ?>/request-diamond.php" class="btn btn-outline btn-sm" style="border-color: white; color: white;">Request a Diamond</a>
             </div>
         </div>
     </div>

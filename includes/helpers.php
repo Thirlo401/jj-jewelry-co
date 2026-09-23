@@ -39,7 +39,14 @@ function generateSlug($string) {
  * Generate unique order number
  */
 function generateOrderNumber() {
-    return 'JJ-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
+    return 'SS-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
+}
+
+/**
+ * Generate unique diamond request number
+ */
+function generateRequestNumber() {
+    return 'DR-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
 }
 
 /**
@@ -115,10 +122,35 @@ function getCategoryName($category) {
     $categories = [
         'rough_diamonds' => 'Rough Diamonds',
         'polished_diamonds' => 'Polished Diamonds',
-        'jewelry' => 'Jewelry'
+        'jewelry' => 'Jewelry',
+        'rings' => 'Rings',
+        'earrings' => 'Earrings',
+        'bracelets' => 'Bracelets',
+        'necklaces' => 'Necklaces',
+        'pendants' => 'Pendants'
     ];
     
     return $categories[$category] ?? $category;
+}
+
+/**
+ * Check if category is a public jewellery category
+ */
+function isPublicCategory($category) {
+    return in_array($category, ['rings', 'earrings', 'bracelets', 'necklaces', 'pendants', 'jewelry']);
+}
+
+/**
+ * Get all public jewellery categories
+ */
+function getPublicCategories() {
+    return [
+        'rings' => 'Rings',
+        'earrings' => 'Earrings',
+        'bracelets' => 'Bracelets',
+        'necklaces' => 'Necklaces',
+        'pendants' => 'Pendants'
+    ];
 }
 
 /**

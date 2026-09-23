@@ -5,6 +5,23 @@ require_once __DIR__ . '/header.php';
 // Handle settings update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_settings'])) {
     if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        $errors = [];
+        
+        // Handle hero background image upload
+        $currentHeroImage = getSetting('hero_background_image');
+        if (isset($_FILES['hero_background_image']) && $_FILES['hero_background_image']['error'] !== UPLOAD_ERR_NO_FILE) {
+            $uploadResult = uploadProductImage($_FILES['hero_background_image']);
+            if ($uploadResult['success']) {
+                // Delete old hero image if exists
+                if ($currentHeroImage) {
+                    deleteProductImage($currentHeroImage);
+                }
+                updateSetting('hero_background_image', $uploadResult['filename']);
+            } else {
+                $errors[] = 'Hero image upload failed: ' . $uploadResult['error'];
+            }
+        }
+        
         // Store settings
         $settings = [
             'store_name', 'store_email', 'store_phone',
@@ -19,7 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_settings'])) {
             updateSetting($key, $value);
         }
         
-        setFlashMessage('success', 'Settings updated successfully');
+        if (empty($errors)) {
+            setFlashMessage('success', 'Settings updated successfully');
+        } else {
+            setFlashMessage('error', implode('<br>', $errors));
+        }
         redirect(BASE_URL . '/admin/settings.php');
     }
 }
@@ -28,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_settings'])) {
 $storeName = getSetting('store_name');
 $storeEmail = getSetting('store_email');
 $storePhone = getSetting('store_phone');
+$heroBackgroundImage = getSetting('hero_background_image');
 $bankName = getSetting('bank_name');
 $accountHolder = getSetting('bank_account_holder');
 $accountNumber = getSetting('bank_account_number');
@@ -45,7 +67,11 @@ $payfastSandbox = getSetting('payfast_sandbox');
     <div class="alert alert-success"><?= e($message) ?></div>
 <?php endif; ?>
 
-<form method="POST">
+<?php if ($message = getFlashMessage('error')): ?>
+    <div class="alert alert-error"><?= $message ?></div>
+<?php endif; ?>
+
+<form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
     
     <div class="admin-card" style="max-width: 800px;">
@@ -66,6 +92,33 @@ $payfastSandbox = getSetting('payfast_sandbox');
                 <label class="form-label">Store Phone</label>
                 <input type="text" name="store_phone" class="form-input" value="<?= e($storePhone) ?>">
             </div>
+        </div>
+    </div>
+    
+    <div class="admin-card" style="max-width: 800px;">
+        <h3>Homepage Hero Section</h3>
+        <p style="color: var(--color-text-light); margin-bottom: var(--spacing-md);">
+            Upload a background image for the homepage hero section. Recommended: 1920x1080px or larger, JPEG/PNG.
+            <br>The image will have a dark overlay to ensure text remains readable.
+        </p>
+        
+        <div class="form-group">
+            <label class="form-label">Hero Background Image</label>
+            <?php if ($heroBackgroundImage): ?>
+                <div style="margin-bottom: var(--spacing-sm);">
+                    <img src="<?= UPLOAD_URL . e($heroBackgroundImage) ?>" 
+                         alt="Current hero background" 
+                         style="max-width: 100%; height: auto; max-height: 200px; object-fit: cover; border-radius: var(--border-radius);">
+                    <p style="color: var(--color-text-light); font-size: 0.875rem; margin-top: 0.5rem;">
+                        Current image. Upload a new one to replace it.
+                    </p>
+                </div>
+            <?php else: ?>
+                <p style="color: var(--color-text-light); font-size: 0.875rem; margin-bottom: 0.5rem;">
+                    No hero background image set. The default gradient will be used.
+                </p>
+            <?php endif; ?>
+            <input type="file" name="hero_background_image" class="form-input" accept="image/jpeg,image/png,image/webp">
         </div>
     </div>
     

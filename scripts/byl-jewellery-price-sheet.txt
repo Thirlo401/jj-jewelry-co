@@ -1,0 +1,82 @@
+BYL JEWELLERY PRICE SHEET
+SS Jewellery (ssjewellery.store)
+Generated: 2026-09-23 18:36:10
+Total Products: 60
+
+Pricing: BYL Wholesale + 15% Markup (ZAR)
+All prices are in South African Rand (ZAR)
+
+================================================================================
+SKU             | Product Name                                       | Wholesale  | Retail     | Category
+================================================================================
+
+BYL-JW-12189    | Round Brilliant Half Eternity Diamond Ring - White | R  15,020.00 | R  17,273.00 | Rings
+BYL-JW-11716    | Round Brilliant Half Eternity Diamond Ring - Rose  | R  15,450.00 | R  17,767.50 | Rings
+BYL-JW-11784    | Round Brilliant Eternity Diamond Ring - In Platinu | R  15,690.00 | R  18,043.50 | Rings
+BYL-JW-9258     | Round Brilliant Diamond Dress Ring - White Gold    | R  16,169.00 | R  18,594.35 | Rings
+BYL-JW-1088     | Round Brilliant Cut Diamond Ring - Yellow Gold     | R  16,170.00 | R  18,595.50 | Rings
+BYL-JW-11714    | Round Brilliant Half Eternity Diamond Ring - Yello | R  16,330.00 | R  18,779.50 | Rings
+BYL-JW-8754     | Round Brilliant Half Eternity Diamond Ring - Rose  | R  16,340.00 | R  18,791.00 | Rings
+BYL-JW-11746    | Baguette Cut Eternity Diamond Ring - White Gold    | R  16,470.00 | R  18,940.50 | Rings
+BYL-JW-10610    | Oval Cut Solitaire Diamond Ring - White Gold       | R  17,090.00 | R  19,653.50 | Rings
+BYL-JW-10872    | Round Brilliant Half Eternity Diamond Ring - Rose  | R  17,110.00 | R  19,676.50 | Rings
+BYL-JW-12945    | Fancy Light Yellow Radiant Cut Diamond Cluster Rin | R  17,110.00 | R  19,676.50 | Rings
+BYL-JW-11807    | Tapered Baguette Cut Diamond Ring - White Gold     | R  17,650.00 | R  20,297.50 | Rings
+BYL-JW-10825    | Round Brilliant Diamond Hoop Earrings - White Gold | R  31,810.00 | R  36,581.50 | Earrings
+BYL-JW-SAER1041 | Round Brilliant Diamond Drop Earrings - White Gold | R  32,070.00 | R  36,880.50 | Earrings
+BYL-JW-SAER1004 | Marquise Cut Diamond Hoop Earrings - Yellow Gold   | R  28,215.00 | R  32,447.25 | Earrings
+BYL-JW-RPID954  | Round Brilliant Diamond Hoop Earrings - White Gold | R 116,020.00 | R 133,423.00 | Earrings
+BYL-JW-12795    | Round Brilliant Cut Halo Diamond Stud Earrings - R | R  39,090.00 | R  44,953.50 | Earrings
+BYL-JW-12793    | Round Brilliant Cut Halo Diamond Stud Earrings - Y | R  40,070.00 | R  46,080.50 | Earrings
+BYL-JW-12784    | Round Brilliant Cut Halo Diamond Stud Earrings - W | R  37,420.00 | R  43,033.00 | Earrings
+BYL-JW-12770    | Round Brilliant Cut Halo Diamond Stud Earrings - W | R  38,790.00 | R  44,608.50 | Earrings
+BYL-JW-12678    | Round Brilliant Cut Diamond Stud Earrings - Rose G | R  26,280.00 | R  30,222.00 | Earrings
+BYL-JW-12675    | Round Brilliant Cut Diamond Stud Earrings - Yellow | R  27,120.00 | R  31,188.00 | Earrings
+BYL-JW-12239    | Round Brilliant Cut Diamond Stud Earrings - White  | R 153,395.00 | R 176,404.25 | Earrings
+BYL-JW-12237    | Round Brilliant Cut Diamond Stud Earrings - White  | R  61,960.00 | R  71,254.00 | Earrings
+BYL-JW-SABR234A | Round Brilliant Cut Diamond Bracelet - White Gold  | R  15,390.00 | R  17,698.50 | Bracelets
+BYL-JW-SABR234B | Three Tone Round Brilliant Cut Diamond Bracelet -  | R  15,390.00 | R  17,698.50 | Bracelets
+BYL-JW-SABR232B | Round Brilliant Cut Diamond Bracelet - Rose Gold   | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR232D | Round Brilliant Cut Diamond Bracelet - Rose Gold   | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR238B | Two Tone Round Brilliant Cut Diamond Bracelet - Ro | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR238A | Three Tone Round Brilliant Cut Diamond Bracelet -  | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR237C | Three Tone Round Brilliant Cut Diamond Bracelet -  | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR237A | Two Tone Round Brilliant Cut Diamond Bracelet - Ro | R  16,682.00 | R  19,184.30 | Bracelets
+BYL-JW-SABR231A | Round Brilliant Cut Diamond Bracelet - White Gold  | R  16,929.00 | R  19,468.35 | Bracelets
+BYL-JW-SABR231B | Round Brilliant Cut Diamond Bracelet - White Gold  | R  16,929.00 | R  19,468.35 | Bracelets
+BYL-JW-SABR231C | Round Brilliant Cut Diamond Bracelet - White Gold  | R  16,929.00 | R  19,468.35 | Bracelets
+BYL-JW-SABR230A | Round Brilliant Cut Diamond Bracelet - Yellow Gold | R  17,195.00 | R  19,774.25 | Bracelets
+BYL-JW-12652    | Fancy Intense Yellow Multi Shaped Diamond Pendant  | R 123,670.00 | R 142,220.50 | Pendants
+BYL-JW-13158    | Pear Shape Black Diamond, Emerald & Double Halo Di | R  44,405.00 | R  51,065.75 | Pendants
+BYL-JW-12931    | Marquise Cut Fancy Yellow Double Halo Diamond Pend | R 285,205.00 | R 327,985.75 | Pendants
+BYL-JW-12558    | Round Brilliant Circle Diamond Pendant - Rose Gold | R  29,430.00 | R  33,844.50 | Pendants
+BYL-JW-10557    | Round Brilliant Diamond Pendant - Rose Gold        | R  35,990.00 | R  41,388.50 | Pendants
+BYL-JW-UPID3772 | Round Brilliant Solitaire Diamond Pendant - White  | R  19,230.00 | R  22,114.50 | Pendants
+BYL-JW-12043    | Fancy Light Yellow Radiant Cut Halo Diamond Pendan | R  84,000.00 | R  96,600.00 | Pendants
+BYL-JW-12685    | Round Brilliant Solitaire Diamond Pendant - Rose G | R  19,210.00 | R  22,091.50 | Pendants
+BYL-JW-12684    | Round Brilliant Solitaire Diamond Pendant - Rose G | R  19,390.00 | R  22,298.50 | Pendants
+BYL-JW-12563    | Round Brilliant Circle Diamond Pendant - White Gol | R  31,360.00 | R  36,064.00 | Pendants
+BYL-JW-12093    | Round Brilliant Teardrop Diamond Pendant - White G | R  25,160.00 | R  28,934.00 | Pendants
+BYL-JW-11988    | Round Brilliant Halo Diamond Pendant - White Gold  | R  25,490.00 | R  29,313.50 | Pendants
+BYL-JW-12706    | Round Brilliant Diamond Tennis Necklace - Yellow G | R  54,260.00 | R  62,399.00 | Necklaces
+BYL-JW-NECK231  | Round Brilliant Diamond Bezel Set Three-Tone Neckl | R  29,010.00 | R  33,361.50 | Necklaces
+BYL-JW-12715    | Round Brilliant Diamond Tennis Necklace - White Go | R 115,330.00 | R 132,629.50 | Necklaces
+BYL-JW-12708    | Round Brilliant Diamond Tennis Necklace - Yellow G | R 159,640.00 | R 183,586.00 | Necklaces
+BYL-JW-12049    | Round Brilliant Illusion Set Diamond Cluster Neckl | R  29,089.00 | R  33,452.35 | Necklaces
+BYL-JW-NECK227B | Round Brilliant Diamond Necklace - White Gold      | R  29,507.00 | R  33,933.05 | Necklaces
+BYL-JW-NECK227A | Round Brilliant Diamond Necklace - White Gold      | R  29,507.00 | R  33,933.05 | Necklaces
+BYL-JW-NECK224C | Round Brilliant Diamond Necklace - Yellow Gold     | R  29,507.00 | R  33,933.05 | Necklaces
+BYL-JW-NECK223B | Round Brilliant Diamond Necklace - Yellow Gold     | R  28,215.00 | R  32,447.25 | Necklaces
+BYL-JW-NECK222C | Round Brilliant Diamond Necklace - White Gold      | R  29,507.00 | R  33,933.05 | Necklaces
+BYL-JW-NECK228A | Round Brilliant Diamond Necklace - White Gold      | R  25,650.00 | R  29,497.50 | Necklaces
+BYL-JW-11728    | Round Brilliant Diamond Cluster Necklace - Rose Go | R  23,351.00 | R  26,853.65 | Necklaces
+
+================================================================================
+SUMMARY BY CATEGORY
+================================================================================
+
+Rings          : 12 products | Total Retail Value: R 226,088.85
+Earrings       : 12 products | Total Retail Value: R 727,076.00
+Bracelets      : 12 products | Total Retail Value: R 228,682.10
+Pendants       : 12 products | Total Retail Value: R 853,921.00
+Necklaces      : 12 products | Total Retail Value: R 669,958.95

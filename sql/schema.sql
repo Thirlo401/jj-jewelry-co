@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `sku` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `slug` varchar(255) NOT NULL,
-  `category` enum('rough_diamonds','polished_diamonds','jewelry') NOT NULL,
+  `category` enum('rough_diamonds','polished_diamonds','rings','earrings','bracelets','necklaces','pendants') NOT NULL,
   `description` text,
   `price` decimal(10,2) NOT NULL,
   `carat_weight` decimal(8,2) DEFAULT NULL,
@@ -92,6 +92,31 @@ CREATE TABLE IF NOT EXISTS `settings` (
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `setting_key` (`setting_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Diamond Requests table
+CREATE TABLE IF NOT EXISTS `diamond_requests` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `request_number` varchar(50) NOT NULL,
+  `diamond_type` enum('polished','rough') NOT NULL,
+  `shape` varchar(50) DEFAULT NULL,
+  `carat_min` decimal(8,2) DEFAULT NULL,
+  `carat_max` decimal(8,2) DEFAULT NULL,
+  `color_notes` text DEFAULT NULL,
+  `clarity_notes` text DEFAULT NULL,
+  `budget` decimal(10,2) DEFAULT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `customer_email` varchar(100) NOT NULL,
+  `customer_phone` varchar(20) NOT NULL,
+  `message` text DEFAULT NULL,
+  `status` enum('new','in_progress','quoted','completed','cancelled') NOT NULL DEFAULT 'new',
+  `admin_notes` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `request_number` (`request_number`),
+  KEY `status` (`status`),
+  KEY `created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 COMMIT;

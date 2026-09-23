@@ -24,7 +24,7 @@ $cartCount = getCartCount();
         <nav class="nav-container">
             <div class="nav-brand">
                 <a href="<?= BASE_URL ?>/">
-                    <span class="brand-name">JJ Jewelry & Co</span>
+                    <span class="brand-name">SS Jewellery</span>
                 </a>
             </div>
             

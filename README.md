@@ -1,13 +1,16 @@
-# JJ Jewelry & Co - E-commerce Platform
+# SS Jewellery - E-commerce Platform
 
-A complete, production-ready online shop for selling rough diamonds, polished diamonds, and fine jewelry. Built for standard cPanel hosting with PHP and MySQL.
+A complete, production-ready online shop for selling fine jewellery. Built for standard cPanel hosting with PHP and MySQL.
+
+**Brand**: SS Jewellery (ssjewellery.store)
 
 ## Features
 
 ### Customer-Facing Features
-- **Elegant Storefront**: Modern, mobile-responsive design with high-end jewelry aesthetic
-- **Product Categories**: Rough Diamonds, Polished Diamonds, and Jewelry
-- **Product Filtering**: Browse by category with multiple sorting options
+- **Elegant Storefront**: Modern, mobile-responsive design with high-end jewellery aesthetic
+- **Product Categories**: Rings, Earrings, Bracelets, Necklaces, and Pendants
+- **Diamond Requests**: Dedicated inquiry form for polished and rough diamonds (admin-only inventory)
+- **Product Filtering**: Browse by jewellery category with multiple sorting options
 - **Detailed Product Pages**: Complete specifications including carat weight, cut, clarity, and color
 - **Shopping Cart**: Session-based cart with quantity management
 - **Secure Checkout**: Customer information capture with validation

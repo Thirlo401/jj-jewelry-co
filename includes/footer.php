@@ -4,16 +4,19 @@
         <div class="footer-container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>JJ Jewelry & Co</h3>
-                    <p>South Africa's premier destination for exceptional diamonds and fine jewelry.</p>
+                    <h3>SS Jewellery</h3>
+                    <p>South Africa's premier destination for exquisite fine jewellery.</p>
                 </div>
                 
                 <div class="footer-col">
                     <h4>Shop</h4>
                     <ul>
-                        <li><a href="<?= BASE_URL ?>/shop.php?category=rough_diamonds">Rough Diamonds</a></li>
-                        <li><a href="<?= BASE_URL ?>/shop.php?category=polished_diamonds">Polished Diamonds</a></li>
-                        <li><a href="<?= BASE_URL ?>/shop.php?category=jewelry">Jewelry</a></li>
+                        <li><a href="<?= BASE_URL ?>/shop.php?category=rings">Rings</a></li>
+                        <li><a href="<?= BASE_URL ?>/shop.php?category=earrings">Earrings</a></li>
+                        <li><a href="<?= BASE_URL ?>/shop.php?category=bracelets">Bracelets</a></li>
+                        <li><a href="<?= BASE_URL ?>/shop.php?category=necklaces">Necklaces</a></li>
+                        <li><a href="<?= BASE_URL ?>/shop.php?category=pendants">Pendants</a></li>
+                        <li><a href="<?= BASE_URL ?>/request-diamond.php">Request a Diamond</a></li>
                     </ul>
                 </div>
                 
@@ -35,7 +38,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; <?= date('Y') ?> JJ Jewelry & Co. All rights reserved.</p>
+                <p>&copy; <?= date('Y') ?> SS Jewellery. All rights reserved.</p>
                 <p><a href="<?= BASE_URL ?>/admin/">Admin Login</a></p>
             </div>
         </div>

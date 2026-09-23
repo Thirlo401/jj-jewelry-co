@@ -6,13 +6,20 @@ require_once __DIR__ . '/includes/header.php';
 $category = $_GET['category'] ?? 'all';
 $sort = $_GET['sort'] ?? 'newest';
 
-// Build query
+// Build query - only show public jewellery categories
 $sql = "SELECT * FROM products WHERE is_active = 1";
 $params = [];
 
-if ($category !== 'all') {
+// Always filter to public categories (hide diamonds)
+$publicCategories = ['rings', 'earrings', 'bracelets', 'necklaces', 'pendants', 'jewelry'];
+if ($category !== 'all' && in_array($category, $publicCategories)) {
     $sql .= " AND category = ?";
     $params[] = $category;
+} else {
+    // Show all public jewellery categories by default
+    $placeholders = implode(',', array_fill(0, count($publicCategories), '?'));
+    $sql .= " AND category IN ($placeholders)";
+    $params = array_merge($params, $publicCategories);
 }
 
 // Add sorting
@@ -44,19 +51,27 @@ $products = db()->fetchAll($sql, $params);
             <div class="filter-group">
                 <a href="?category=all&sort=<?= e($sort) ?>" 
                    class="filter-btn <?= $category === 'all' ? 'active' : '' ?>">
-                    All
+                    All Jewellery
                 </a>
-                <a href="?category=rough_diamonds&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'rough_diamonds' ? 'active' : '' ?>">
-                    Rough Diamonds
+                <a href="?category=rings&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'rings' ? 'active' : '' ?>">
+                    Rings
                 </a>
-                <a href="?category=polished_diamonds&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'polished_diamonds' ? 'active' : '' ?>">
-                    Polished Diamonds
+                <a href="?category=earrings&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'earrings' ? 'active' : '' ?>">
+                    Earrings
                 </a>
-                <a href="?category=jewelry&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'jewelry' ? 'active' : '' ?>">
-                    Jewelry
+                <a href="?category=bracelets&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'bracelets' ? 'active' : '' ?>">
+                    Bracelets
+                </a>
+                <a href="?category=necklaces&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'necklaces' ? 'active' : '' ?>">
+                    Necklaces
+                </a>
+                <a href="?category=pendants&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'pendants' ? 'active' : '' ?>">
+                    Pendants
                 </a>
             </div>
             

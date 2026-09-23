@@ -132,16 +132,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_product'])) {
                 <label class="form-label required">Category</label>
                 <select name="category" class="form-select" required>
                     <option value="">Select Category</option>
-                    <option value="rough_diamonds" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'rough_diamonds' ? 'selected' : '' ?>>
-                        Rough Diamonds
-                    </option>
-                    <option value="polished_diamonds" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'polished_diamonds' ? 'selected' : '' ?>>
-                        Polished Diamonds
-                    </option>
-                    <option value="jewelry" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'jewelry' ? 'selected' : '' ?>>
-                        Jewelry
-                    </option>
+                    <optgroup label="Public Jewellery Categories">
+                        <option value="rings" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'rings' ? 'selected' : '' ?>>
+                            Rings
+                        </option>
+                        <option value="earrings" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'earrings' ? 'selected' : '' ?>>
+                            Earrings
+                        </option>
+                        <option value="bracelets" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'bracelets' ? 'selected' : '' ?>>
+                            Bracelets
+                        </option>
+                        <option value="necklaces" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'necklaces' ? 'selected' : '' ?>>
+                            Necklaces
+                        </option>
+                        <option value="pendants" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'pendants' ? 'selected' : '' ?>>
+                            Pendants
+                        </option>
+                        <option value="jewelry" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'jewelry' ? 'selected' : '' ?>>
+                            Jewelry (Legacy)
+                        </option>
+                    </optgroup>
+                    <optgroup label="Admin Only - Request Inventory">
+                        <option value="rough_diamonds" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'rough_diamonds' ? 'selected' : '' ?>>
+                            Rough Diamonds (Hidden from Public)
+                        </option>
+                        <option value="polished_diamonds" <?= ($product['category'] ?? $_POST['category'] ?? '') === 'polished_diamonds' ? 'selected' : '' ?>>
+                            Polished Diamonds (Hidden from Public)
+                        </option>
+                    </optgroup>
                 </select>
+                <small style="color: var(--color-text-light); display: block; margin-top: 0.5rem;">
+                    Public jewellery categories appear in shop. Diamonds are admin-only inventory for request fulfillment.
+                </small>
             </div>
         </div>
         
