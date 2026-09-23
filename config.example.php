@@ -1,6 +1,6 @@
 <?php
 /**
- * JJ Jewelry & Co - Configuration
+ * SS Jewellery & Co - Configuration
  * 
  * INSTRUCTIONS:
  * 1. Copy this file to config.php
@@ -17,10 +17,10 @@ define('DB_PASS', 'your_database_password');
 
 // Site Configuration
 define('BASE_URL', 'https://yourdomain.com'); // No trailing slash
-define('SITE_NAME', 'JJ Jewelry & Co');
+define('SITE_NAME', 'SS Jewellery & Co');
 
 // Security
-define('SESSION_NAME', 'jj_jewelry_session');
+define('SESSION_NAME', 'ss_jewellery_session');
 define('CSRF_TOKEN_NAME', 'csrf_token');
 
 // File Upload Configuration

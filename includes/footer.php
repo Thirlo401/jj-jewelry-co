@@ -32,7 +32,7 @@
                 
                 <div class="footer-col">
                     <h4>Contact</h4>
-                    <p><?= e(getSetting('store_email', 'info@jjjewelry.co.za')) ?></p>
+                    <p><?= e(getSetting('store_email', 'info@ssjewellery.store')) ?></p>
                     <p><?= e(getSetting('store_phone', '+27 11 123 4567')) ?></p>
                 </div>
             </div>

@@ -1,4 +1,4 @@
--- JJ Jewelry & Co Seed Data
+-- SS Jewellery & Co Seed Data
 -- Default admin user and sample products
 
 -- Insert default admin user

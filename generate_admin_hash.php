@@ -1,6 +1,6 @@
 <?php
 /**
- * Password Hash Generator for JJ Jewelry & Co
+ * Password Hash Generator for SS Jewellery & Co
  * 
  * This script generates the correct bcrypt hash for the default admin password.
  * Run this once during setup if you need to regenerate the admin password hash.
