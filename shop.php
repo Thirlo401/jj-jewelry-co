@@ -6,13 +6,21 @@ require_once __DIR__ . '/includes/header.php';
 $category = $_GET['category'] ?? 'all';
 $sort = $_GET['sort'] ?? 'newest';
 
-// Build query
+// Define public jewellery categories
+$jewelleryCategories = ['rings', 'earrings', 'pendants', 'bracelets', 'necklaces'];
+
+// Build query - exclude rough and polished diamonds from public shop
 $sql = "SELECT * FROM products WHERE is_active = 1";
 $params = [];
 
 if ($category !== 'all') {
     $sql .= " AND category = ?";
     $params[] = $category;
+} else {
+    // Default 'all' filter shows only jewellery, not diamonds
+    $placeholders = implode(',', array_fill(0, count($jewelleryCategories), '?'));
+    $sql .= " AND category IN ($placeholders)";
+    $params = $jewelleryCategories;
 }
 
 // Add sorting
@@ -37,26 +45,34 @@ $products = db()->fetchAll($sql, $params);
     <div style="padding: var(--spacing-xl) 0;">
         <h1 style="margin-bottom: var(--spacing-md);">Shop Our Collection</h1>
         <p style="color: var(--color-text-light); font-size: 1.125rem; margin-bottom: var(--spacing-lg);">
-            Discover our exquisite selection of diamonds and fine jewelry
+            Discover our exquisite selection of fine jewellery
         </p>
         
         <div class="shop-header">
             <div class="filter-group">
                 <a href="?category=all&sort=<?= e($sort) ?>" 
                    class="filter-btn <?= $category === 'all' ? 'active' : '' ?>">
-                    All
+                    All Jewellery
                 </a>
-                <a href="?category=rough_diamonds&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'rough_diamonds' ? 'active' : '' ?>">
-                    Rough Diamonds
+                <a href="?category=rings&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'rings' ? 'active' : '' ?>">
+                    Rings
                 </a>
-                <a href="?category=polished_diamonds&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'polished_diamonds' ? 'active' : '' ?>">
-                    Polished Diamonds
+                <a href="?category=earrings&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'earrings' ? 'active' : '' ?>">
+                    Earrings
                 </a>
-                <a href="?category=jewelry&sort=<?= e($sort) ?>" 
-                   class="filter-btn <?= $category === 'jewelry' ? 'active' : '' ?>">
-                    Jewelry
+                <a href="?category=pendants&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'pendants' ? 'active' : '' ?>">
+                    Pendants
+                </a>
+                <a href="?category=bracelets&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'bracelets' ? 'active' : '' ?>">
+                    Bracelets
+                </a>
+                <a href="?category=necklaces&sort=<?= e($sort) ?>" 
+                   class="filter-btn <?= $category === 'necklaces' ? 'active' : '' ?>">
+                    Necklaces
                 </a>
             </div>
             

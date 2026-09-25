@@ -39,7 +39,7 @@ function generateSlug($string) {
  * Generate unique order number
  */
 function generateOrderNumber() {
-    return 'JJ-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
+    return 'SS-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6));
 }
 
 /**
@@ -115,10 +115,15 @@ function getCategoryName($category) {
     $categories = [
         'rough_diamonds' => 'Rough Diamonds',
         'polished_diamonds' => 'Polished Diamonds',
-        'jewelry' => 'Jewelry'
+        'jewelry' => 'Jewelry',
+        'rings' => 'Rings',
+        'earrings' => 'Earrings',
+        'pendants' => 'Pendants',
+        'bracelets' => 'Bracelets',
+        'necklaces' => 'Necklaces'
     ];
     
-    return $categories[$category] ?? $category;
+    return $categories[$category] ?? ucfirst($category);
 }
 
 /**

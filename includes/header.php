@@ -13,7 +13,7 @@ $cartCount = getCartCount();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($pageTitle) ? e($pageTitle) . ' - ' : '' ?><?= SITE_NAME ?></title>
-    <meta name="description" content="<?= e($pageDescription ?? 'Finest rough diamonds, polished diamonds, and exquisite jewelry in South Africa') ?>">
+    <meta name="description" content="<?= e($pageDescription ?? 'Exquisite fine jewellery including rings, earrings, pendants, bracelets, and necklaces in South Africa') ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/style.css">
     <?php if (isset($additionalCSS)): ?>
         <?= $additionalCSS ?>
@@ -24,7 +24,7 @@ $cartCount = getCartCount();
         <nav class="nav-container">
             <div class="nav-brand">
                 <a href="<?= BASE_URL ?>/">
-                    <span class="brand-name">JJ Jewelry & Co</span>
+                    <span class="brand-name">SS Jewellery & Co</span>
                 </a>
             </div>
             

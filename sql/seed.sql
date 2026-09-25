@@ -7,12 +7,12 @@
 -- NOTE: If password doesn't work, run: php generate_admin_hash.php
 --       to generate a new hash, then update this line or run UPDATE query
 INSERT INTO `admin_users` (`username`, `password`, `email`) VALUES
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@jjjewelry.co.za');
+('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin@ssjewellery.store');
 
 -- Insert default site settings
 INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('store_name', 'JJ Jewelry & Co'),
-('store_email', 'info@jjjewelry.co.za'),
+('store_email', 'info@ssjewellery.store'),
 ('store_phone', '+27 11 123 4567'),
 ('currency', 'ZAR'),
 ('bank_name', 'First National Bank'),

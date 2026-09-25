@@ -1,6 +1,6 @@
 <?php
 $pageTitle = 'Finest Diamonds & Jewelry in South Africa';
-$pageDescription = 'Discover exceptional rough diamonds, polished diamonds, and exquisite jewelry from JJ Jewelry & Co.';
+$pageDescription = 'Discover exquisite fine jewellery including rings, earrings, pendants, bracelets, and necklaces from SS Jewellery & Co.';
 
 require_once __DIR__ . '/includes/header.php';
 

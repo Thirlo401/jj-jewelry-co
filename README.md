@@ -1,12 +1,12 @@
-# JJ Jewelry & Co - E-commerce Platform
+# SS Jewellery & Co - E-commerce Platform
 
-A complete, production-ready online shop for selling rough diamonds, polished diamonds, and fine jewelry. Built for standard cPanel hosting with PHP and MySQL.
+A complete, production-ready online shop for selling fine jewellery including rings, earrings, pendants, bracelets, and necklaces. Built for standard cPanel hosting with PHP and MySQL.
 
 ## Features
 
 ### Customer-Facing Features
 - **Elegant Storefront**: Modern, mobile-responsive design with high-end jewelry aesthetic
-- **Product Categories**: Rough Diamonds, Polished Diamonds, and Jewelry
+- **Product Categories**: Rings, Earrings, Pendants, Bracelets, and Necklaces (jewellery-only public catalogue)
 - **Product Filtering**: Browse by category with multiple sorting options
 - **Detailed Product Pages**: Complete specifications including carat weight, cut, clarity, and color
 - **Shopping Cart**: Session-based cart with quantity management
@@ -175,8 +175,15 @@ To enable PayFast:
 - Add logo image by editing `includes/header.php`
 
 ### Product Categories
-Categories are defined in the database schema as ENUM. To add/modify categories, update:
-1. Database: `products` table `category` column
+
+Public shop categories (jewellery only):
+- Rings, Earrings, Pendants, Bracelets, Necklaces
+
+Request-only categories (admin inventory, not in public shop):
+- Rough Diamonds, Polished Diamonds
+
+To add/modify categories, update:
+1. Database: `products` table `category` column (see `sql/migrate_to_jewellery_categories.sql`)
 2. Code: `includes/helpers.php` → `getCategoryName()` function
 3. Forms: Admin product edit form and shop filters
 
@@ -202,7 +209,7 @@ Regular backups recommended:
 
 ## License
 
-Proprietary - All rights reserved by JJ Jewelry & Co
+Proprietary - All rights reserved by SS Jewellery & Co
 
 ---
 
