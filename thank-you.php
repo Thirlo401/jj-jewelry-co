@@ -115,7 +115,82 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </div>
             
-            <?php if ($order['payment_method'] === 'eft'): ?>
+            <?php if ($order['payment_method'] === 'payfast'): ?>
+                <?php if ($order['payment_status'] === 'COMPLETE'): ?>
+                    <div class="admin-card" style="text-align: left; margin-top: var(--spacing-md); background: linear-gradient(135deg, #d4f4dd 0%, #fefefe 100%); border: 2px solid var(--color-success);">
+                        <h3 style="color: var(--color-success);">✓ Payment Successful</h3>
+                        <p style="color: var(--color-text); margin-bottom: var(--spacing-md); font-weight: 500;">
+                            Your payment of <strong style="color: var(--color-success); font-size: 1.15rem;"><?= formatPrice($order['total_amount']) ?></strong> has been successfully processed via PayFast.
+                        </p>
+                        
+                        <div style="background: white; padding: var(--spacing-md); border-radius: var(--border-radius); margin-bottom: var(--spacing-md);">
+                            <div style="display: grid; gap: var(--spacing-sm);">
+                                <div style="display: grid; grid-template-columns: 150px 1fr; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
+                                    <strong>Payment Method:</strong> 
+                                    <span>PayFast Online Payment</span>
+                                </div>
+                                <?php if ($order['payfast_payment_id']): ?>
+                                    <div style="display: grid; grid-template-columns: 150px 1fr; gap: 0.5rem; padding: 0.5rem 0;">
+                                        <strong>Transaction ID:</strong> 
+                                        <span style="font-family: monospace; font-size: 0.9rem;"><?= e($order['payfast_payment_id']) ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
+                        <div style="background: white; padding: var(--spacing-md); border-left: 4px solid var(--color-success); border-radius: var(--border-radius);">
+                            <p style="color: var(--color-text); line-height: 1.6; margin: 0;">
+                                <strong>What's next?</strong><br>
+                                We've received your payment and your order is now being processed. You will receive a confirmation email shortly, and we'll notify you when your order ships.
+                            </p>
+                        </div>
+                    </div>
+                <?php elseif ($order['payment_status'] === 'PENDING'): ?>
+                    <div class="admin-card" style="text-align: left; margin-top: var(--spacing-md); background: #fff3cd; border: 2px solid #ffc107;">
+                        <h3 style="color: #856404;">⏳ Payment Pending</h3>
+                        <p style="color: #856404; margin-bottom: var(--spacing-md); font-weight: 500;">
+                            We're waiting for payment confirmation from PayFast.
+                        </p>
+                        
+                        <div style="background: white; padding: var(--spacing-md); border-radius: var(--border-radius);">
+                            <p style="color: #856404; line-height: 1.6; margin: 0;">
+                                <strong>This is normal!</strong><br>
+                                Payment confirmations typically arrive within a few minutes. You'll receive an email once your payment is confirmed. If you completed your payment, there's nothing more you need to do.
+                            </p>
+                            <p style="color: #856404; line-height: 1.6; margin-top: var(--spacing-sm);">
+                                If you didn't complete your payment, you can contact us to arrange an alternative payment method using your order number <strong><?= e($order['order_number']) ?></strong>.
+                            </p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="admin-card" style="text-align: left; margin-top: var(--spacing-md); background: #f8d7da; border: 2px solid #dc3545;">
+                        <h3 style="color: #721c24;">⚠️ Payment Issue</h3>
+                        <p style="color: #721c24; margin-bottom: var(--spacing-md); font-weight: 500;">
+                            There was an issue with your payment.
+                        </p>
+                        
+                        <div style="background: white; padding: var(--spacing-md); border-radius: var(--border-radius);">
+                            <p style="color: #721c24; line-height: 1.6; margin: 0;">
+                                Your order <strong><?= e($order['order_number']) ?></strong> has been created, but the payment could not be completed. 
+                                Please contact us to arrange payment or place a new order.
+                            </p>
+                            
+                            <?php if (getSetting('store_email') || getSetting('store_phone')): ?>
+                                <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid #dc3545;">
+                                    <strong>Contact us:</strong><br>
+                                    <?php if (getSetting('store_email')): ?>
+                                        Email: <a href="mailto:<?= e(getSetting('store_email')) ?>" style="color: #721c24; text-decoration: underline;"><?= e(getSetting('store_email')) ?></a><br>
+                                    <?php endif; ?>
+                                    <?php if (getSetting('store_phone')): ?>
+                                        Phone: <a href="tel:<?= e(getSetting('store_phone')) ?>" style="color: #721c24; text-decoration: underline;"><?= e(getSetting('store_phone')) ?></a>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            
+            <?php elseif ($order['payment_method'] === 'eft'): ?>
                 <?php if ($bankDetailsConfigured): ?>
                     <div class="admin-card" style="text-align: left; margin-top: var(--spacing-md); background: linear-gradient(135deg, #f8f4f0 0%, #fefefe 100%); border: 2px solid var(--color-accent);">
                         <h3 style="color: var(--color-accent);">💳 Payment Instructions</h3>
