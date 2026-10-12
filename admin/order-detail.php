@@ -173,8 +173,62 @@ require_once __DIR__ . '/header.php';
                     <strong>Payment Method:</strong><br>
                     <?= strtoupper($order['payment_method']) ?>
                 </div>
+                <?php if ($order['payment_method'] === 'payfast' && $order['payment_status']): ?>
+                    <div>
+                        <strong>Payment Status:</strong><br>
+                        <span class="badge <?= $order['payment_status'] === 'COMPLETE' ? 'badge-success' : ($order['payment_status'] === 'PENDING' ? 'badge-warning' : 'badge-danger') ?>">
+                            <?= e($order['payment_status']) ?>
+                        </span>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
+        
+        <?php if ($order['payment_method'] === 'payfast' && $order['payfast_payment_id']): ?>
+            <div class="admin-card" style="background: linear-gradient(135deg, #f0f8ff 0%, #fefefe 100%); border: 2px solid #007bff;">
+                <h3 style="color: #007bff;">💳 PayFast Payment Details</h3>
+                
+                <div style="padding: var(--spacing-sm); background: white; border-radius: 4px; margin-bottom: var(--spacing-sm);">
+                    <div style="font-size: 0.85rem; color: var(--color-text-light); margin-bottom: 0.25rem;">
+                        <strong>Transaction ID:</strong>
+                    </div>
+                    <div style="font-size: 0.95rem; font-weight: 600; font-family: monospace; color: #007bff;">
+                        <?= e($order['payfast_payment_id']) ?>
+                    </div>
+                </div>
+                
+                <div style="font-size: 0.9rem; color: var(--color-text-light); line-height: 1.6;">
+                    <div style="margin-bottom: 0.5rem;">
+                        <strong style="color: var(--color-text);">Amount Paid:</strong> 
+                        <span style="color: #007bff; font-weight: 600;"><?= formatPrice($order['total_amount']) ?></span>
+                    </div>
+                    
+                    <?php if ($order['payment_status'] === 'COMPLETE'): ?>
+                        <div style="margin-top: var(--spacing-sm); padding: var(--spacing-sm); background: #d4f4dd; border-left: 3px solid var(--color-success); border-radius: 4px;">
+                            <strong style="color: var(--color-success);">✓ Payment Verified</strong><br>
+                            <span style="font-size: 0.85rem; color: #155724;">PayFast has confirmed this payment.</span>
+                        </div>
+                    <?php elseif ($order['payment_status'] === 'PENDING'): ?>
+                        <div style="margin-top: var(--spacing-sm); padding: var(--spacing-sm); background: #fff3cd; border-left: 3px solid #ffc107; border-radius: 4px;">
+                            <strong style="color: #856404;">⏳ Payment Pending</strong><br>
+                            <span style="font-size: 0.85rem; color: #856404;">Waiting for PayFast confirmation.</span>
+                        </div>
+                    <?php else: ?>
+                        <div style="margin-top: var(--spacing-sm); padding: var(--spacing-sm); background: #f8d7da; border-left: 3px solid #dc3545; border-radius: 4px;">
+                            <strong style="color: #721c24;">⚠️ Payment <?= e($order['payment_status']) ?></strong><br>
+                            <span style="font-size: 0.85rem; color: #721c24;">Check PayFast dashboard for details.</span>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php elseif ($order['payment_method'] === 'payfast' && !$order['payfast_payment_id']): ?>
+            <div class="admin-card" style="background: #fff3cd; border: 2px solid #ffc107;">
+                <h3 style="color: #856404;">⚠️ PayFast Payment Pending</h3>
+                <p style="font-size: 0.9rem; color: #856404; line-height: 1.6; margin: 0;">
+                    Customer selected PayFast but no transaction ID received yet. They may not have completed the payment.
+                </p>
+            </div>
+        <?php endif; ?>
         
         <?php if ($order['payment_method'] === 'eft'): ?>
             <div class="admin-card" style="background: var(--color-bg-light);">

@@ -129,14 +129,17 @@ $payfastSandbox = getSetting('payfast_sandbox');
             
             <div class="form-group">
                 <label class="form-label">Merchant Key</label>
-                <input type="text" name="payfast_merchant_key" class="form-input" value="<?= e($payfastMerchantKey) ?>">
+                <input type="password" name="payfast_merchant_key" class="form-input" value="<?= e($payfastMerchantKey) ?>" placeholder="<?= !empty($payfastMerchantKey) ? '••••••••••••••••' : '' ?>">
+                <?php if (!empty($payfastMerchantKey)): ?>
+                    <small style="color: var(--color-text-light);">Key is set (hidden for security)</small>
+                <?php endif; ?>
             </div>
         </div>
         
         <div class="form-group">
             <label class="form-label">Passphrase</label>
-            <input type="text" name="payfast_passphrase" class="form-input" value="<?= e($payfastPassphrase) ?>">
-            <small style="color: var(--color-text-light);">Optional but recommended for security</small>
+            <input type="password" name="payfast_passphrase" class="form-input" value="<?= e($payfastPassphrase) ?>" placeholder="<?= !empty($payfastPassphrase) ? '••••••••••••••••' : '' ?>">
+            <small style="color: var(--color-text-light);">Optional but recommended for security<?= !empty($payfastPassphrase) ? ' (currently set and hidden)' : '' ?></small>
         </div>
         
         <div class="form-group">
