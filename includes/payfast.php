@@ -30,8 +30,8 @@ function generatePayFastSignature($data, $passphrase = '') {
         $val = trim((string)$val);
         // Only include non-empty values
         if ($val !== '') {
-            // Use uppercase percent-encoding for URLs (e.g., %3A not %3a)
-            $encodedVal = rawurlencode($val);
+            // Use urlencode as per PayFast's official PHP sample (spaces become '+')
+            $encodedVal = urlencode($val);
             $pfOutput .= $key . '=' . $encodedVal . '&';
         }
     }
@@ -41,7 +41,7 @@ function generatePayFastSignature($data, $passphrase = '') {
     
     // Append passphrase if set (non-empty string)
     if (is_string($passphrase) && trim($passphrase) !== '') {
-        $pfOutput .= '&passphrase=' . rawurlencode(trim($passphrase));
+        $pfOutput .= '&passphrase=' . urlencode(trim($passphrase));
     }
     
     return md5($pfOutput);
