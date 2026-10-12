@@ -3,32 +3,44 @@
  * PayFast Integration Helper Functions
  * 
  * PayFast API Documentation: https://developers.payfast.co.za/
+ * 
+ * IMPORTANT: The Admin passphrase setting must exactly match the passphrase configured
+ * in your PayFast merchant dashboard (Settings > Integration). If no passphrase is set
+ * in PayFast dashboard, leave the Admin passphrase setting empty (both must match).
+ * 
+ * Field Order: For payment form submissions, fields must be in PayFast's documented order
+ * (NOT alphabetical). The signature is generated from fields in the exact order they appear.
  */
 
 /**
  * Generate PayFast payment signature
  * 
- * @param array $data Payment data array
+ * For payment forms, data must be in PayFast's documented field order (NOT alphabetical).
+ * For ITN validation, data is used in the order received from PayFast.
+ * 
+ * @param array $data Payment data array (order matters - do NOT sort)
  * @param string $passphrase Optional passphrase
  * @return string MD5 signature
  */
 function generatePayFastSignature($data, $passphrase = '') {
-    // Sort the array by key, alphabetically
-    ksort($data);
-    
-    // Create parameter string
+    // Create parameter string - iterate in the order provided (NO SORTING)
     $pfOutput = '';
     foreach ($data as $key => $val) {
+        // Cast to string and trim
+        $val = trim((string)$val);
+        // Only include non-empty values
         if ($val !== '') {
-            $pfOutput .= $key . '=' . urlencode(trim($val)) . '&';
+            // Use urlencode as per PayFast's official PHP sample (spaces become '+')
+            $encodedVal = urlencode($val);
+            $pfOutput .= $key . '=' . $encodedVal . '&';
         }
     }
     
     // Remove last ampersand
     $pfOutput = substr($pfOutput, 0, -1);
     
-    // Append passphrase if set
-    if (!empty($passphrase)) {
+    // Append passphrase if set (non-empty string)
+    if (is_string($passphrase) && trim($passphrase) !== '') {
         $pfOutput .= '&passphrase=' . urlencode(trim($passphrase));
     }
     
@@ -68,39 +80,46 @@ function validatePayFastPayment($pfData, $pfParamString, $pfHost = 'www.payfast.
 /**
  * Build PayFast payment data array
  * 
+ * Fields MUST be in PayFast's documented order for signature generation.
+ * All values are cast to strings for consistent signature calculation.
+ * 
  * @param array $order Order details
  * @param array $config PayFast configuration
- * @return array Payment data ready for PayFast
+ * @return array Payment data ready for PayFast (in correct order)
  */
 function buildPayFastData($order, $config) {
-    $data = [
-        // Merchant details
-        'merchant_id' => $config['merchant_id'],
-        'merchant_key' => $config['merchant_key'],
-        
-        // Buyer details
-        'name_first' => getFirstName($order['customer_name']),
-        'name_last' => getLastName($order['customer_name']),
-        'email_address' => $order['customer_email'],
-        'cell_number' => formatPhoneNumber($order['customer_phone']),
-        
-        // Transaction details
-        'm_payment_id' => $order['order_number'],
-        'amount' => number_format($order['total_amount'], 2, '.', ''),
-        'item_name' => 'Order ' . $order['order_number'] . ' - SS Jewellery',
-        'item_description' => getOrderDescription($order['id']),
-        
-        // URLs
-        'return_url' => $config['return_url'],
-        'cancel_url' => $config['cancel_url'],
-        'notify_url' => $config['notify_url'],
-        
-        // Email confirmation
-        'email_confirmation' => 1,
-        'confirmation_address' => $order['customer_email'],
-    ];
+    // Build data in PayFast's documented field order (CRITICAL - do not reorder)
+    $data = [];
     
-    // Generate signature
+    // Merchant details (required, first)
+    $data['merchant_id'] = (string)$config['merchant_id'];
+    $data['merchant_key'] = (string)$config['merchant_key'];
+    
+    // URLs (required, before buyer details)
+    $data['return_url'] = (string)$config['return_url'];
+    $data['cancel_url'] = (string)$config['cancel_url'];
+    $data['notify_url'] = (string)$config['notify_url'];
+    
+    // Buyer details (required for most transactions)
+    $data['name_first'] = (string)getFirstName($order['customer_name']);
+    $data['name_last'] = (string)getLastName($order['customer_name']);
+    $data['email_address'] = (string)$order['customer_email'];
+    $data['cell_number'] = (string)formatPhoneNumber($order['customer_phone']);
+    
+    // Transaction details (required)
+    $data['m_payment_id'] = (string)$order['order_number'];
+    $data['amount'] = (string)number_format($order['total_amount'], 2, '.', '');
+    $data['item_name'] = (string)('Order ' . $order['order_number'] . ' - SS Jewellery');
+    $data['item_description'] = (string)getOrderDescription($order['id']);
+    
+    // Email confirmation (optional - include only if set)
+    $confirmationEmail = (string)$order['customer_email'];
+    if ($confirmationEmail !== '') {
+        $data['email_confirmation'] = '1';
+        $data['confirmation_address'] = $confirmationEmail;
+    }
+    
+    // Generate signature and append last (signature must be last field)
     $data['signature'] = generatePayFastSignature($data, $config['passphrase'] ?? '');
     
     return $data;
