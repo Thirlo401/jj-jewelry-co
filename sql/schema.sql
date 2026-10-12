@@ -57,6 +57,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `province` varchar(100) NOT NULL,
   `total_amount` decimal(10,2) NOT NULL,
   `payment_method` varchar(50) NOT NULL DEFAULT 'eft',
+  `payment_status` varchar(50) DEFAULT NULL COMMENT 'PayFast payment status: PENDING, COMPLETE, FAILED, CANCELLED',
+  `payfast_payment_id` varchar(100) DEFAULT NULL COMMENT 'PayFast payment/transaction ID',
+  `payfast_data` text DEFAULT NULL COMMENT 'JSON encoded PayFast transaction data',
   `status` enum('pending','paid','processing','shipped','cancelled') NOT NULL DEFAULT 'pending',
   `customer_notes` text DEFAULT NULL,
   `admin_notes` text DEFAULT NULL,
@@ -65,7 +68,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `order_number` (`order_number`),
   KEY `status` (`status`),
-  KEY `created_at` (`created_at`)
+  KEY `created_at` (`created_at`),
+  KEY `idx_payfast_payment_id` (`payfast_payment_id`),
+  KEY `idx_payment_status` (`payment_status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Order items table
