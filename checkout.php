@@ -131,8 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
     </div>
     <form id="payfast_form" action="' . e($payfastUrl) . '" method="POST">';
                     
+                    // Render hidden inputs - cast values to strings for consistency
                     foreach ($paymentData as $key => $value) {
-                        echo '<input type="hidden" name="' . e($key) . '" value="' . e($value) . '">';
+                        echo '<input type="hidden" name="' . e((string)$key) . '" value="' . e((string)$value) . '">';
                     }
                     
                     echo '</form>
