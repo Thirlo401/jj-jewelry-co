@@ -70,8 +70,85 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
                 // Clear cart
                 clearCart();
                 
-                // Redirect to thank you page
-                redirect(BASE_URL . '/thank-you.php?order=' . $orderNumber);
+                // Handle payment method
+                if ($paymentMethod === 'payfast') {
+                    // Redirect to PayFast payment gateway
+                    require_once __DIR__ . '/includes/payfast.php';
+                    
+                    $payfastConfig = [
+                        'merchant_id' => getSetting('payfast_merchant_id'),
+                        'merchant_key' => getSetting('payfast_merchant_key'),
+                        'passphrase' => getSetting('payfast_passphrase'),
+                        'return_url' => BASE_URL . '/payfast-return.php?order=' . $orderNumber,
+                        'cancel_url' => BASE_URL . '/payfast-cancel.php?order=' . $orderNumber,
+                        'notify_url' => BASE_URL . '/payfast-notify.php',
+                    ];
+                    
+                    // Update order payment status to PENDING
+                    updateOrderPaymentStatus($orderId, 'PENDING', null);
+                    
+                    // Build payment data
+                    $paymentData = buildPayFastData([
+                        'id' => $orderId,
+                        'order_number' => $orderNumber,
+                        'customer_name' => $customerName,
+                        'customer_email' => $customerEmail,
+                        'customer_phone' => $customerPhone,
+                        'total_amount' => $cartTotal,
+                    ], $payfastConfig);
+                    
+                    $payfastUrl = getPayFastUrl(getSetting('payfast_sandbox'));
+                    
+                    // Log the transaction attempt
+                    logPayFastTransaction('Redirecting to PayFast', [
+                        'order_number' => $orderNumber,
+                        'amount' => $cartTotal,
+                        'sandbox' => getSetting('payfast_sandbox') ? 'yes' : 'no'
+                    ]);
+                    
+                    // Render PayFast redirect form
+                    echo '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to PayFast...</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
+        .redirect-message { text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 400px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #d4af37; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { margin: 0 0 1rem; color: #333; }
+        p { color: #666; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <div class="spinner"></div>
+        <h2>Redirecting to PayFast</h2>
+        <p>Please wait while we redirect you to complete your payment...</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Order: ' . e($orderNumber) . '</p>
+    </div>
+    <form id="payfast_form" action="' . e($payfastUrl) . '" method="POST">';
+                    
+                    foreach ($paymentData as $key => $value) {
+                        echo '<input type="hidden" name="' . e($key) . '" value="' . e($value) . '">';
+                    }
+                    
+                    echo '</form>
+    <script>
+        // Auto-submit form after a brief delay
+        setTimeout(function() {
+            document.getElementById("payfast_form").submit();
+        }, 1500);
+    </script>
+</body>
+</html>';
+                    exit;
+                } else {
+                    // EFT payment - redirect to thank you page
+                    redirect(BASE_URL . '/thank-you.php?order=' . $orderNumber);
+                }
             } catch (Exception $e) {
                 $errors[] = 'An error occurred while processing your order. Please try again.';
                 error_log($e->getMessage());
