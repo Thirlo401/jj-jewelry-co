@@ -80,20 +80,26 @@ workspace/
 │       └── products/       # Product images (created on upload)
 ├── includes/
 │   ├── auth.php            # Authentication functions
+│   ├── bootstrap.php       # Bootstrap loader
 │   ├── db.php              # Database connection
 │   ├── footer.php          # Public footer
 │   ├── header.php          # Public header
 │   ├── helpers.php         # Helper functions
+│   ├── payfast.php         # PayFast integration helpers
 │   └── session.php         # Session management
 ├── sql/
 │   ├── schema.sql          # Database schema
-│   └── seed.sql            # Sample data
+│   ├── seed.sql            # Sample data
+│   └── payfast_migration.sql # PayFast database migration (for existing installs)
 ├── about.php               # About page
 ├── cart.php                # Shopping cart
 ├── checkout.php            # Checkout process
 ├── config.example.php      # Configuration template
 ├── contact.php             # Contact page
 ├── index.php               # Homepage
+├── payfast-cancel.php      # PayFast cancellation handler
+├── payfast-notify.php      # PayFast ITN (notification) endpoint
+├── payfast-return.php      # PayFast return handler
 ├── privacy.php             # Privacy policy
 ├── product.php             # Product detail page
 ├── shop.php                # Shop/product listing
@@ -161,11 +167,38 @@ The `sql/seed.sql` file includes:
 Configure your bank details in Admin → Settings. Customers will see these details on the order confirmation page with instructions to use the order number as payment reference.
 
 ### PayFast (Optional)
-To enable PayFast:
+PayFast integration allows customers to pay online with credit card, debit card, or instant EFT.
+
+**Features:**
+- Automatic payment verification via ITN (Instant Transaction Notification)
+- Secure signature validation
+- Sandbox mode for testing
+- Real-time payment status updates
+- Transaction logging for debugging
+
+**To enable PayFast:**
 1. Sign up at https://www.payfast.co.za
 2. Get your Merchant ID, Merchant Key, and Passphrase
 3. Add credentials in Admin → Settings
-4. Set Sandbox Mode to OFF for live payments
+4. **Important:** Configure ITN URL in PayFast dashboard: `https://yourdomain.com/payfast-notify.php`
+5. Set Sandbox Mode to OFF for live payments
+
+**Files:**
+- `checkout.php` - Redirects to PayFast when customer selects PayFast payment
+- `payfast-notify.php` - ITN endpoint (receives payment confirmations from PayFast)
+- `payfast-return.php` - Return URL after successful payment
+- `payfast-cancel.php` - Cancel URL if customer cancels payment
+- `includes/payfast.php` - PayFast helper functions (signature generation, validation)
+- `logs/payfast.log` - Transaction logs (auto-created, not committed to git)
+
+**Security:**
+- Signature validation on all PayFast requests
+- Amount verification (prevents payment tampering)
+- Idempotent ITN handling (prevents duplicate processing)
+- Credentials stored in database, never in code
+- Merchant key masked in admin interface
+
+For detailed setup instructions, see [DEPLOY.md](DEPLOY.md) Section 11.
 
 ## Customization
 

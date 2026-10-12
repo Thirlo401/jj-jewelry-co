@@ -191,6 +191,10 @@ chmod 755 assets/uploads/products
    - Get credentials from PayFast dashboard
    - Enter Merchant ID, Merchant Key, Passphrase
    - Set Sandbox Mode to OFF for live payments
+   - **Important:** Configure PayFast ITN (Instant Transaction Notification) URL:
+     - In PayFast dashboard, set your ITN URL to: `https://yourdomain.com/payfast-notify.php`
+     - Replace `yourdomain.com` with your actual domain
+     - This URL must be accessible from the internet (PayFast servers will POST to it)
    - **Save Settings**
 
 ### Step 9: Security Hardening (Critical!)
@@ -243,6 +247,179 @@ chmod 755 assets/uploads/products
    - Edit an existing product
    - Mark a product as featured
    - Deactivate a product
+
+### Step 11: PayFast Integration Setup (Optional)
+
+If you want to accept online payments via credit card, debit card, or instant EFT, follow these steps:
+
+#### 11.1 Create PayFast Account
+
+1. **Sign up at PayFast**:
+   - Visit https://www.payfast.co.za
+   - Click "Sign Up" and complete registration
+   - Verify your email address
+   - Complete business verification (required for live payments)
+
+2. **Get your credentials**:
+   - Log in to PayFast dashboard
+   - Navigate to Settings → Integration
+   - Copy your **Merchant ID** and **Merchant Key**
+   - Generate a **Passphrase** (recommended for security)
+   - Save these credentials securely
+
+#### 11.2 Configure PayFast in Admin Panel
+
+1. **Enter PayFast credentials**:
+   - Log in to your admin panel
+   - Go to Settings
+   - Scroll to "PayFast Integration" section
+   - Enter your Merchant ID
+   - Enter your Merchant Key
+   - Enter your Passphrase (if you created one)
+   - Keep "Sandbox Mode" **UNCHECKED** for live payments
+   - Click "Save Settings"
+
+2. **Test with Sandbox (Optional)**:
+   - To test before going live, check "Sandbox Mode"
+   - Use PayFast sandbox credentials (different from live)
+   - Place test orders to verify integration
+   - Uncheck "Sandbox Mode" when ready to accept real payments
+
+#### 11.3 Configure PayFast ITN (Critical!)
+
+The ITN (Instant Transaction Notification) allows PayFast to notify your site about payment status.
+
+1. **Set up ITN URL in PayFast**:
+   - Log in to PayFast dashboard
+   - Navigate to Settings → Integration
+   - Find "Notify URL" or "ITN URL" field
+   - Enter: `https://yourdomain.com/payfast-notify.php`
+   - Replace `yourdomain.com` with your actual domain
+   - **Must be HTTPS** (SSL certificate required)
+   - Click Save
+
+2. **Verify ITN endpoint is accessible**:
+   - In your browser, visit: `https://yourdomain.com/payfast-notify.php`
+   - You should see "No POST data received" (this is correct)
+   - If you see 404 or other errors, verify the file was uploaded
+
+3. **Check file permissions**:
+   - File: `payfast-notify.php` should have permission 644
+   - Folder: `logs/` should exist with permission 755 (will be auto-created)
+
+#### 11.4 Test PayFast Integration
+
+1. **Place a test order**:
+   - Browse your shop and add items to cart
+   - Proceed to checkout
+   - Select "PayFast (Online Payment)" option
+   - Fill in customer details
+   - Click "Place Order"
+   - You should be redirected to PayFast payment page
+
+2. **Complete test payment**:
+   - On PayFast page, enter test card details (if in sandbox)
+   - Or use your real card for a small amount (if live)
+   - Complete the payment
+   - You'll be redirected back to your site
+
+3. **Verify payment status**:
+   - Check the thank-you page shows "Payment Successful"
+   - Log in to admin panel
+   - View the order in "Orders"
+   - Order status should be "Paid"
+   - You should see PayFast transaction ID
+
+4. **Check PayFast logs** (if issues occur):
+   - Via FTP or File Manager, check `logs/payfast.log`
+   - This file contains detailed PayFast transaction logs
+   - Useful for debugging payment issues
+
+#### 11.5 PayFast Security Best Practices
+
+1. **NEVER commit credentials to git**:
+   - Credentials are stored in database via Admin Settings
+   - Never hardcode them in PHP files
+   - Never share credentials in support tickets
+
+2. **Use HTTPS**:
+   - PayFast requires SSL certificate
+   - Enable AutoSSL in cPanel (free)
+   - Or install Let's Encrypt certificate
+
+3. **Use Passphrase**:
+   - Always set a passphrase in PayFast dashboard
+   - Enter the same passphrase in Admin Settings
+   - This adds extra security to payment signatures
+
+4. **Monitor ITN failures**:
+   - Check `logs/payfast.log` regularly
+   - Failed ITN calls indicate payment verification issues
+   - Contact PayFast support if persistent failures
+
+5. **Test thoroughly before going live**:
+   - Use sandbox mode for initial testing
+   - Place multiple test orders
+   - Test cancellation flow
+   - Verify all payment statuses update correctly
+
+#### 11.6 Troubleshooting PayFast
+
+**Problem: PayFast option doesn't appear at checkout**
+
+- Solution: Verify Merchant ID is entered in Admin Settings
+- Check that you saved the settings after entering credentials
+
+**Problem: Payment succeeds but order status not updated**
+
+- Solution: Check ITN URL is configured in PayFast dashboard
+- Verify `payfast-notify.php` file exists and is accessible
+- Check `logs/payfast.log` for ITN validation errors
+- Ensure your site is accessible from internet (not localhost)
+
+**Problem: "Invalid signature" error in logs**
+
+- Solution: Verify Merchant Key is entered correctly
+- Check that Passphrase in Admin Settings matches PayFast dashboard
+- PayFast sandbox and live use different credentials
+
+**Problem: Amount mismatch error**
+
+- Solution: This is a security check
+- Indicates price in cart doesn't match PayFast amount
+- Check for price changes between cart and checkout
+- Clear cart and try again
+
+**Problem: Customer not redirected after payment**
+
+- Solution: Check return_url and cancel_url in code
+- Verify BASE_URL in config.php is correct
+- Check for PHP errors in cPanel error logs
+
+### Step 12: Database Migration for PayFast
+
+If you already have an existing installation and want to add PayFast, run this SQL migration:
+
+1. **Log in to phpMyAdmin**
+2. **Select your database**
+3. **Click "SQL" tab**
+4. **Run the following SQL**:
+
+```sql
+-- Add PayFast payment tracking fields
+ALTER TABLE `orders` 
+ADD COLUMN `payment_status` VARCHAR(50) DEFAULT NULL COMMENT 'PayFast payment status' AFTER `payment_method`,
+ADD COLUMN `payfast_payment_id` VARCHAR(100) DEFAULT NULL COMMENT 'PayFast transaction ID' AFTER `payment_status`,
+ADD COLUMN `payfast_data` TEXT DEFAULT NULL COMMENT 'PayFast transaction data' AFTER `payfast_payment_id`,
+ADD INDEX `idx_payfast_payment_id` (`payfast_payment_id`),
+ADD INDEX `idx_payment_status` (`payment_status`);
+```
+
+5. **Verify migration**:
+   - Check that `orders` table now has new columns
+   - Test placing an order with PayFast
+
+**Note**: For new installations, these fields are already in `sql/schema.sql`
 
 ## Document Root Configuration
 
