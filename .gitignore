@@ -5,6 +5,10 @@ config.php
 assets/uploads/products/*
 !assets/uploads/products/.gitkeep
 
+# Logs
+logs/
+*.log
+
 # System files
 .DS_Store
 Thumbs.db
