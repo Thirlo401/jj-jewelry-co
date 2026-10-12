@@ -1,0 +1,13 @@
+# Protect admin directory with extra security
+
+# Allow only PHP files
+<FilesMatch "\.(jpg|jpeg|png|gif|css|js)$">
+    Require all denied
+</FilesMatch>
+
+# Block common admin attacks
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+    RewriteRule .* - [F]
+</IfModule>

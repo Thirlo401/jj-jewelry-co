@@ -1,0 +1,8 @@
+<?php
+// Create a simple placeholder image (1x1 transparent PNG)
+// This is used when products don't have images uploaded yet
+
+header('Content-Type: image/png');
+
+// 1x1 transparent PNG
+echo base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');

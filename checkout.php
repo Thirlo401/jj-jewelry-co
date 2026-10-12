@@ -1,0 +1,328 @@
+<?php
+// Bootstrap - load essentials before any output
+require_once __DIR__ . '/includes/bootstrap.php';
+
+// Check if cart is empty BEFORE any output
+$cartItems = getCartItemsWithDetails();
+$cartTotal = calculateCartTotal(getCart());
+
+if (empty($cartItems)) {
+    redirect(BASE_URL . '/cart.php');
+}
+
+// Handle checkout submission BEFORE any output
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['place_order'])) {
+    if (verifyCsrfToken($_POST['csrf_token'] ?? '')) {
+        // Validate input
+        $errors = [];
+        $customerName = trim($_POST['customer_name'] ?? '');
+        $customerEmail = trim($_POST['customer_email'] ?? '');
+        $customerPhone = trim($_POST['customer_phone'] ?? '');
+        $shippingAddress = trim($_POST['shipping_address'] ?? '');
+        $city = trim($_POST['city'] ?? '');
+        $postalCode = trim($_POST['postal_code'] ?? '');
+        $province = trim($_POST['province'] ?? '');
+        $paymentMethod = $_POST['payment_method'] ?? 'eft';
+        $customerNotes = trim($_POST['customer_notes'] ?? '');
+        
+        if (empty($customerName)) $errors[] = 'Name is required';
+        if (empty($customerEmail) || !filter_var($customerEmail, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Valid email is required';
+        }
+        if (empty($customerPhone)) $errors[] = 'Phone is required';
+        if (empty($shippingAddress)) $errors[] = 'Shipping address is required';
+        if (empty($city)) $errors[] = 'City is required';
+        if (empty($postalCode)) $errors[] = 'Postal code is required';
+        if (empty($province)) $errors[] = 'Province is required';
+        
+        if (empty($errors)) {
+            try {
+                // Generate order number
+                $orderNumber = generateOrderNumber();
+                
+                // Create order
+                $db = db();
+                $db->query(
+                    "INSERT INTO orders (order_number, customer_name, customer_email, customer_phone, 
+                     shipping_address, city, postal_code, province, total_amount, payment_method, customer_notes) 
+                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    [
+                        $orderNumber, $customerName, $customerEmail, $customerPhone,
+                        $shippingAddress, $city, $postalCode, $province,
+                        $cartTotal, $paymentMethod, $customerNotes
+                    ]
+                );
+                
+                $orderId = $db->lastInsertId();
+                
+                // Add order items
+                foreach ($cartItems as $item) {
+                    $db->query(
+                        "INSERT INTO order_items (order_id, product_id, product_name, product_sku, price, quantity, subtotal) 
+                         VALUES (?, ?, ?, ?, ?, ?, ?)",
+                        [
+                            $orderId, $item['id'], $item['name'], $item['sku'],
+                            $item['price'], $item['quantity'], $item['subtotal']
+                        ]
+                    );
+                }
+                
+                // Clear cart
+                clearCart();
+                
+                // Handle payment method
+                if ($paymentMethod === 'payfast') {
+                    // Redirect to PayFast payment gateway
+                    require_once __DIR__ . '/includes/payfast.php';
+                    
+                    $payfastConfig = [
+                        'merchant_id' => getSetting('payfast_merchant_id'),
+                        'merchant_key' => getSetting('payfast_merchant_key'),
+                        'passphrase' => getSetting('payfast_passphrase'),
+                        'return_url' => BASE_URL . '/payfast-return.php?order=' . $orderNumber,
+                        'cancel_url' => BASE_URL . '/payfast-cancel.php?order=' . $orderNumber,
+                        'notify_url' => BASE_URL . '/payfast-notify.php',
+                    ];
+                    
+                    // Update order payment status to PENDING
+                    updateOrderPaymentStatus($orderId, 'PENDING', null);
+                    
+                    // Build payment data
+                    $paymentData = buildPayFastData([
+                        'id' => $orderId,
+                        'order_number' => $orderNumber,
+                        'customer_name' => $customerName,
+                        'customer_email' => $customerEmail,
+                        'customer_phone' => $customerPhone,
+                        'total_amount' => $cartTotal,
+                    ], $payfastConfig);
+                    
+                    $payfastUrl = getPayFastUrl(getSetting('payfast_sandbox'));
+                    
+                    // Log the transaction attempt
+                    logPayFastTransaction('Redirecting to PayFast', [
+                        'order_number' => $orderNumber,
+                        'amount' => $cartTotal,
+                        'sandbox' => getSetting('payfast_sandbox') ? 'yes' : 'no'
+                    ]);
+                    
+                    // Render PayFast redirect form
+                    echo '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to PayFast...</title>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #f5f5f5; }
+        .redirect-message { text-align: center; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 400px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #d4af37; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 0 auto 1rem; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        h2 { margin: 0 0 1rem; color: #333; }
+        p { color: #666; margin: 0; }
+    </style>
+</head>
+<body>
+    <div class="redirect-message">
+        <div class="spinner"></div>
+        <h2>Redirecting to PayFast</h2>
+        <p>Please wait while we redirect you to complete your payment...</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Order: ' . e($orderNumber) . '</p>
+    </div>
+    <form id="payfast_form" action="' . e($payfastUrl) . '" method="POST">';
+                    
+                    foreach ($paymentData as $key => $value) {
+                        echo '<input type="hidden" name="' . e($key) . '" value="' . e($value) . '">';
+                    }
+                    
+                    echo '</form>
+    <script>
+        // Auto-submit form after a brief delay
+        setTimeout(function() {
+            document.getElementById("payfast_form").submit();
+        }, 1500);
+    </script>
+</body>
+</html>';
+                    exit;
+                } else {
+                    // EFT payment - redirect to thank you page
+                    redirect(BASE_URL . '/thank-you.php?order=' . $orderNumber);
+                }
+            } catch (Exception $e) {
+                $errors[] = 'An error occurred while processing your order. Please try again.';
+                error_log($e->getMessage());
+            }
+        }
+    }
+}
+
+// Now safe to output HTML
+$pageTitle = 'Checkout';
+require_once __DIR__ . '/includes/header.php';
+?>
+
+<div class="container">
+    <div style="padding: var(--spacing-lg) 0;">
+        <h1>Checkout</h1>
+        
+        <?php if (!empty($errors)): ?>
+            <div class="alert alert-error">
+                <strong>Please correct the following errors:</strong>
+                <ul style="margin: 0.5rem 0 0 1.5rem;">
+                    <?php foreach ($errors as $error): ?>
+                        <li><?= e($error) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        
+        <div class="checkout-grid">
+            <div>
+                <form method="POST" id="checkout-form">
+                    <input type="hidden" name="csrf_token" value="<?= generateCsrfToken() ?>">
+                    
+                    <div class="admin-card">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label required">Full Name</label>
+                            <input type="text" name="customer_name" class="form-input" 
+                                   value="<?= e($_POST['customer_name'] ?? '') ?>" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label required">Email</label>
+                                <input type="email" name="customer_email" class="form-input" 
+                                       value="<?= e($_POST['customer_email'] ?? '') ?>" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label required">Phone</label>
+                                <input type="tel" name="customer_phone" class="form-input" 
+                                       value="<?= e($_POST['customer_phone'] ?? '') ?>" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <h3>Shipping Address</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label required">Street Address</label>
+                            <input type="text" name="shipping_address" class="form-input" 
+                                   value="<?= e($_POST['shipping_address'] ?? '') ?>" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label required">City</label>
+                                <input type="text" name="city" class="form-input" 
+                                       value="<?= e($_POST['city'] ?? '') ?>" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label required">Postal Code</label>
+                                <input type="text" name="postal_code" class="form-input" 
+                                       value="<?= e($_POST['postal_code'] ?? '') ?>" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label required">Province</label>
+                            <select name="province" class="form-select" required>
+                                <option value="">Select Province</option>
+                                <option value="Gauteng" <?= ($_POST['province'] ?? '') === 'Gauteng' ? 'selected' : '' ?>>Gauteng</option>
+                                <option value="Western Cape" <?= ($_POST['province'] ?? '') === 'Western Cape' ? 'selected' : '' ?>>Western Cape</option>
+                                <option value="KwaZulu-Natal" <?= ($_POST['province'] ?? '') === 'KwaZulu-Natal' ? 'selected' : '' ?>>KwaZulu-Natal</option>
+                                <option value="Eastern Cape" <?= ($_POST['province'] ?? '') === 'Eastern Cape' ? 'selected' : '' ?>>Eastern Cape</option>
+                                <option value="Free State" <?= ($_POST['province'] ?? '') === 'Free State' ? 'selected' : '' ?>>Free State</option>
+                                <option value="Mpumalanga" <?= ($_POST['province'] ?? '') === 'Mpumalanga' ? 'selected' : '' ?>>Mpumalanga</option>
+                                <option value="Limpopo" <?= ($_POST['province'] ?? '') === 'Limpopo' ? 'selected' : '' ?>>Limpopo</option>
+                                <option value="North West" <?= ($_POST['province'] ?? '') === 'North West' ? 'selected' : '' ?>>North West</option>
+                                <option value="Northern Cape" <?= ($_POST['province'] ?? '') === 'Northern Cape' ? 'selected' : '' ?>>Northern Cape</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <h3>Payment Method</h3>
+                        
+                        <div style="margin-bottom: var(--spacing-md);">
+                            <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: var(--spacing-sm); background: linear-gradient(135deg, #f8f4f0 0%, #f5f0ea 100%); border: 2px solid var(--color-accent); border-radius: var(--border-radius);">
+                                <input type="radio" name="payment_method" value="eft" checked>
+                                <strong style="color: var(--color-text);">EFT / Bank Transfer</strong>
+                                <span style="margin-left: auto; background: var(--color-accent); color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">PREFERRED</span>
+                            </label>
+                            <div style="padding: var(--spacing-md); background: white; margin-top: 0.5rem; font-size: 0.95rem; border-left: 3px solid var(--color-accent); line-height: 1.6;">
+                                <strong style="color: var(--color-text);">Complete your order now &mdash; payment details provided next.</strong><br>
+                                After confirming your order, you'll receive complete banking details along with your unique order reference number. Simply make an EFT payment using your order number as the payment reference, and we'll process your order once payment is received.
+                                <?php if (!getSetting('payfast_merchant_id')): ?>
+                                    <div style="margin-top: 0.75rem; padding: 0.5rem; background: var(--color-bg-light); border-radius: 4px; font-size: 0.9rem;">
+                                        <em>Online card payment option coming soon.</em>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        
+                        <?php if (getSetting('payfast_merchant_id')): ?>
+                            <div>
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; padding: var(--spacing-sm); background: var(--color-bg-light); border-radius: var(--border-radius);">
+                                    <input type="radio" name="payment_method" value="payfast">
+                                    <strong>PayFast (Online Payment)</strong>
+                                </label>
+                                <div style="padding: var(--spacing-sm); background: var(--color-bg-light); margin-top: 0.5rem; font-size: 0.95rem; color: var(--color-text-light);">
+                                    Pay securely with credit card, debit card, or instant EFT.
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="admin-card">
+                        <h3>Additional Notes</h3>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Order Notes (Optional)</label>
+                            <textarea name="customer_notes" class="form-textarea" 
+                                      placeholder="Any special instructions or requests?"><?= e($_POST['customer_notes'] ?? '') ?></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <div>
+                <div class="admin-card" style="position: sticky; top: 100px;">
+                    <h3>Order Summary</h3>
+                    
+                    <div style="margin: var(--spacing-md) 0;">
+                        <?php foreach ($cartItems as $item): ?>
+                            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--color-border);">
+                                <div>
+                                    <strong><?= e($item['name']) ?></strong><br>
+                                    <small style="color: var(--color-text-light);">Qty: <?= $item['quantity'] ?></small>
+                                </div>
+                                <div><?= formatPrice($item['subtotal']) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    
+                    <div class="cart-total">
+                        <span>Total:</span>
+                        <span><?= formatPrice($cartTotal) ?></span>
+                    </div>
+                    
+                    <button type="submit" name="place_order" form="checkout-form" class="btn btn-accent" style="width: 100%; margin-top: var(--spacing-md);">
+                        Place Order
+                    </button>
+                    
+                    <a href="<?= BASE_URL ?>/cart.php" class="btn btn-outline" style="width: 100%; margin-top: var(--spacing-sm); text-align: center;">
+                        Back to Cart
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php require_once __DIR__ . '/includes/footer.php'; ?>
